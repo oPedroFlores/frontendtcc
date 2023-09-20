@@ -25,7 +25,6 @@
 }
 
 .button{
-  cursor: pointer;
   height: 80px;
   width: 50%;
   background-color: var(--cor-bege-escuro);
@@ -36,6 +35,7 @@
 }
 
 .disabledbutton{
+  cursor: pointer;
   background-color: var(--cor-bege-claro);
   font-size: .85rem;
   font-weight: normal;

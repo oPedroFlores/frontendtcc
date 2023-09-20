@@ -4,7 +4,7 @@ import styles from './CSS Components/Login.module.css';
 import Input from './components/Input';
 import Btn from './components/ButtonComponent';
 import UseForm from '../Hooks/UseForm';
-import { LOGIN_AUTHENTICATE, USER_REGISTER } from '../api';
+import { AUTO_LOGIN, LOGIN_AUTHENTICATE, USER_REGISTER } from '../api';
 
 const Login = () => {
   const userLogin = UseForm();
@@ -15,6 +15,31 @@ const Login = () => {
   const passwordReg = UseForm('password');
   const [fetchError, setFetchError] = useState(null);
   const [login, setLogin] = useState(true);
+
+  React.useEffect(() => {
+    handleLogin();
+
+    
+  }, [])
+
+
+  async function handleLogin (){
+    const localUserString = window.localStorage.getItem('tccuser'); 
+    const localUser = JSON.parse(localUserString);
+    if (localUser && localUser.token) {
+      const token = localUser.token;
+      const { url, options } = AUTO_LOGIN(
+        token
+    );
+      const response = await fetch(url, options);
+      const json = await response.json();
+      if(response.status === 201){
+        console.log("Logado!")
+      }else{
+        console.log(json)
+      }
+    }
+  }
 
   const handleChange = (param) => {
     setLogin(param);
@@ -40,6 +65,7 @@ const Login = () => {
           username: json.username,
           email: json.email,
           token: json.acessToken,
+          role: json.role,
           name: json.name,
         };
         localStorage.setItem('tccuser', JSON.stringify(userStorage));

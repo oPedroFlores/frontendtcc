@@ -25,3 +25,16 @@ export function USER_REGISTER(body) {
     },
   };
 }
+
+export function AUTO_LOGIN(token) {
+  return {
+    url: API_URL + '/user',
+    options: {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer '+token,
+        'Content-Type': 'application/json',
+      },
+    },
+  };
+}
