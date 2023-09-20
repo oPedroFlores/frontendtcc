@@ -1,0 +1,33 @@
+.wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.error{
+  color: red;
+  font-size: 1rem;
+  max-width: 70%;
+  text-align: center;
+}
+
+.input{
+  width: 300px;
+  height: 30px;
+  border: 1px solid black;
+  margin-bottom: 10px;
+  outline: none;
+  font-size: 1rem;
+}
+
+.input:focus{
+  font-weight: bold;
+}
+
+.label{
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
