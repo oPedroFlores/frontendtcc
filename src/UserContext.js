@@ -30,7 +30,23 @@ export const UserStorage = ({ children }) => {
               name: json.name,
             };
             setData(userStorage);
-            navigate('/perfil');
+            switch (userStorage.role) {
+              case "0":
+                navigate('/perfil')
+                break;
+              case "1":
+                navigate('/client/home')
+                break;
+              case "2":
+                navigate('/client/home')
+                break;
+            
+              default:
+                console.log(userStorage.role)
+                console.log("teste def")
+                navigate('/perfil')
+                break;
+            }
           } else {
             throw new Error('Erro na autenticação!');
           }
@@ -63,7 +79,23 @@ export const UserStorage = ({ children }) => {
         name: json.name,
       };
       localStorage.setItem('tccuser', JSON.stringify(userStorage));
-      navigate('/perfil');
+      switch (userStorage.role) {
+        case "0":
+          navigate('/perfil')
+          break;
+        case "1":
+          navigate('/client/home')
+          break;
+        case "2":
+          navigate('/client/home')
+          break;
+      
+        default:
+          console.log(userStorage.role)
+          console.log("teste def")
+          navigate('/perfil')
+          break;
+      }
       setData(userStorage);
       setLogged(true);
     } else {

@@ -4,7 +4,7 @@ import styles from '../CSS Components/NavBar.module.css';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { UserContext } from '../../UserContext';
 const NavBar = () => {
-  const { data, userLogout } = React.useContext(UserContext);
+  const { data, userLogout } = React.useContext(UserContext) || {};
   const navRef = React.useRef();
 
   const showNavBar = () => {
