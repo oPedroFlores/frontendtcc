@@ -57,6 +57,7 @@ const Login = () => {
         password: passwordReg.value,
       });
       const response = await fetch(url, options);
+      console.log(options);
       const json = await response.json();
       console.log(json);
     }

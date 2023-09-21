@@ -9,6 +9,61 @@ export const UserStorage = ({ children }) => {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(false);
   const navigate = useNavigate();
+
+  async function userLoginFunc(email, password) {
+    setError(null);
+    setLoading(true);
+    const { url, options } = LOGIN_AUTHENTICATE({
+      email: email,
+      password: password,
+    });
+    const response = await fetch(url, options);
+    const json = await response.json();
+    const resStatus = response.status;
+    if (resStatus === 200) {
+      const userStorage = {
+        username: json.username,
+        email: json.email,
+        token: json.acessToken,
+        role: json.role,
+        name: json.name,
+      };
+      localStorage.setItem('tccuser', JSON.stringify(userStorage));
+      switch (Number(userStorage.role)) {
+        case 0:
+          navigate('/perfil');
+          break;
+        case 1:
+          navigate('/client/home');
+          break;
+        case 2:
+          navigate('/client/home');
+          break;
+
+        default:
+          console.log(userStorage.role);
+          navigate('/perfil');
+          break;
+      }
+      setData(userStorage);
+      setLogged(true);
+    } else {
+      setData(null);
+      setLogged(false);
+    }
+    setLoading(false);
+    return { response, json };
+  }
+
+  async function userLogout() {
+    setData(null);
+    setError(null);
+    setLoading(false);
+    setLogged(false);
+    window.localStorage.removeItem('tccuser');
+    navigate('/login');
+  }
+
   React.useEffect(() => {
     async function handleLogin() {
       const localUserString = window.localStorage.getItem('tccuser');
@@ -30,21 +85,21 @@ export const UserStorage = ({ children }) => {
               name: json.name,
             };
             setData(userStorage);
-            switch (userStorage.role) {
-              case "0":
-                navigate('/perfil')
+            console.log(json.role);
+            switch (Number(userStorage.role)) {
+              case 0:
+                navigate('/perfil');
                 break;
-              case "1":
-                navigate('/client/home')
+              case 1:
+                navigate('/client/home');
                 break;
-              case "2":
-                navigate('/client/home')
+              case 2:
+                navigate('/client/home');
                 break;
-            
+
               default:
-                console.log(userStorage.role)
-                console.log("teste def")
-                navigate('/perfil')
+                console.log(userStorage.role);
+                navigate('/perfil');
                 break;
             }
           } else {
@@ -59,61 +114,6 @@ export const UserStorage = ({ children }) => {
     }
     handleLogin();
   }, []);
-
-  async function userLoginFunc(email, password) {
-    setError(null);
-    setLoading(true);
-    const { url, options } = LOGIN_AUTHENTICATE({
-      email: email,
-      password: password,
-    });
-    const response = await fetch(url, options);
-    const json = await response.json();
-    const resStatus = response.status;
-    if (resStatus === 200) {
-      const userStorage = {
-        username: json.username,
-        email: json.email,
-        token: json.acessToken,
-        role: json.role,
-        name: json.name,
-      };
-      localStorage.setItem('tccuser', JSON.stringify(userStorage));
-      switch (userStorage.role) {
-        case "0":
-          navigate('/perfil')
-          break;
-        case "1":
-          navigate('/client/home')
-          break;
-        case "2":
-          navigate('/client/home')
-          break;
-      
-        default:
-          console.log(userStorage.role)
-          console.log("teste def")
-          navigate('/perfil')
-          break;
-      }
-      setData(userStorage);
-      setLogged(true);
-    } else {
-      setData(null);
-      setLogged(false);
-    }
-    setLoading(false);
-    return { response, json };
-  }
-
-  async function userLogout() {
-    setData(null);
-    setError(null);
-    setLoading(false);
-    setLogged(false);
-    window.localStorage.removeItem('tccuser');
-    navigate('/login');
-  }
 
   return (
     <UserContext.Provider

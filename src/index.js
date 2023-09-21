@@ -14,8 +14,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ProtectedUserRoute from './ProtectedUserRoute';
 import Dashboard from './pages/Client/ClientDashboard';
 import ClientHome from './pages/Client/ClientHome';
-import CadastroFuncionario from './pages/Client/CadastroFuncionario';
-import CadastroServico from './pages/Client/CadastroServico';
+import Funcionarios from './pages/Client/Funcionarios';
+import Servicos from './pages/Client/Servicos';
 
 const router = createBrowserRouter([
   {
@@ -30,7 +30,7 @@ const router = createBrowserRouter([
         path: '/',
         element: <Home />,
       },
-      
+
       {
         path: 'login',
         element: <Login />,
@@ -41,9 +41,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'perfil/*',
-        element: <ProtectedUserRoute>
-          <Perfil />
-        </ProtectedUserRoute>,
+        element: (
+          <ProtectedUserRoute>
+            <Perfil />
+          </ProtectedUserRoute>
+        ),
       },
     ],
   },
@@ -65,11 +67,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'cadastrar/funcionario',
-        element: <CadastroFuncionario />,
+        element: <Funcionarios />,
       },
       {
         path: 'cadastrar/servico',
-        element: <CadastroServico />,
+        element: <Servicos />,
       },
     ],
   },

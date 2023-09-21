@@ -1,0 +1,124 @@
+.divFunc{
+  height: calc(100vh - 80px);
+  width: 100%;
+  background-color: var(--cor-bege-claro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.switchFunc{
+  height: 100px;
+  width: 400px;
+  background-color: var(--cor-bege-escuro);
+  position: fixed;
+  top: 90px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.switchFunc button{
+  width: 45%;
+  cursor: pointer;
+  transition: .5s ease all;
+  border: none;
+  border-radius: 5px;
+  height: 80%;
+  font-size: 1.25rem;
+}
+
+.disabledButton{
+  transform: scale(0.9);
+  background-color: transparent;
+}
+
+.workerForm{
+  display: flex;
+  gap: 5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  background-color: var(--cor-clay-1);
+  border: 1px solid black;
+  padding: 20px 50px;
+}
+
+.workerForm input{
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 120%;
+}
+
+/* Cards */
+.divWorkersCard{
+  height: 500px;
+  width: 50vw;
+  box-sizing: content-box;
+  border-radius: 5px;
+  padding: 50px;
+  background-color: var(--cor-clay-3);
+  display: flex;
+  overflow-y: scroll;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.workerCard{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  padding: 30px;
+  font-size: 1.5rem;
+  height: 20%;
+  background-color: var(--cor-clay-1);
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+}
+
+.workerCardActions{
+  width: 30%;
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 180%;
+}
+
+.workerCardActions button{
+  width: 50%;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: .5s ease all;
+  border: none;
+  border-radius: 5px;
+  height: 100%;
+}
+
+.workerCardActions button:hover{
+  transform: scale(1.05);
+}
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #000000;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border-radius: 10px;
+}

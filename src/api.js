@@ -32,9 +32,37 @@ export function AUTO_LOGIN(token) {
     options: {
       method: 'POST',
       headers: {
-        'Authorization': 'Bearer '+token,
+        Authorization: 'Bearer ' + token,
         'Content-Type': 'application/json',
       },
+    },
+  };
+}
+
+// Workers
+
+export function GET_WORKERS(token) {
+  return {
+    url: API_URL + '/workers',
+    options: {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    },
+  };
+}
+
+export function SET_WORKER(token, body) {
+  return {
+    url: API_URL + '/workers',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
     },
   };
 }
