@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 
 import Login from './pages/Login';
+import Perfil from './pages/Perfil';
 import Planos from './pages/Planos';
 import Home from './pages/Home';
 import Page404 from './pages/Page404';
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: 'planos',
         element: <Planos />,
+      },
+      {
+        path: 'perfil',
+        element: <Perfil />,
       },
     ],
   },

@@ -1,5 +1,6 @@
 import React from 'react';
 import NavBar from './components/NavBar';
+import { UserContext } from '../UserContext';
 
 const Planos = () => {
   return (

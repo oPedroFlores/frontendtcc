@@ -1,12 +1,14 @@
 import './App.css';
-
+import { UserStorage } from './UserContext';
 import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <Outlet />
-    </div>
+    <UserStorage>
+      <div className="App">
+        <Outlet />
+      </div>
+    </UserStorage>
   );
 }
 

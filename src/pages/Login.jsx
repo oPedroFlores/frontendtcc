@@ -4,7 +4,9 @@ import styles from './CSS Components/Login.module.css';
 import Input from './components/Input';
 import Btn from './components/ButtonComponent';
 import UseForm from '../Hooks/UseForm';
-import { AUTO_LOGIN, LOGIN_AUTHENTICATE, USER_REGISTER } from '../api';
+import { USER_REGISTER } from '../api';
+import { UserContext } from '../UserContext';
+import { Navigate } from 'react-router-dom';
 
 const Login = () => {
   const userLogin = UseForm();
@@ -16,61 +18,25 @@ const Login = () => {
   const [fetchError, setFetchError] = useState(null);
   const [login, setLogin] = useState(true);
 
-  React.useEffect(() => {
-    handleLogin();
-
-    
-  }, [])
-
-
-  async function handleLogin (){
-    const localUserString = window.localStorage.getItem('tccuser'); 
-    const localUser = JSON.parse(localUserString);
-    if (localUser && localUser.token) {
-      const token = localUser.token;
-      const { url, options } = AUTO_LOGIN(
-        token
-    );
-      const response = await fetch(url, options);
-      const json = await response.json();
-      if(response.status === 201){
-        console.log("Logado!")
-      }else{
-        console.log(json)
-      }
-    }
-  }
-
+  const { userLoginFunc, loading, logged } = React.useContext(UserContext);
+  if (logged) return <Navigate to="/perfil" />;
   const handleChange = (param) => {
     setLogin(param);
   };
 
   async function handleSubmitLogin(event) {
     event.preventDefault();
-
     if (userLogin.validate() && passwordLogin.validate()) {
-      const { url, options } = LOGIN_AUTHENTICATE({
-        email: userLogin.value,
-        password: passwordLogin.value,
-      });
-      const response = await fetch(url, options);
-      const json = await response.json();
-      if (response.status !== 200) {
-        const message = json.message;
+      const responseFunc = await userLoginFunc(
+        userLogin.value,
+        passwordLogin.value,
+      );
+      if (responseFunc.response.status !== 200) {
+        const message = responseFunc.json.message;
+        window.localStorage.removeItem('tccuser');
         setFetchError(message);
-        return;
       } else {
         setFetchError(null);
-        const userStorage = {
-          username: json.username,
-          email: json.email,
-          token: json.acessToken,
-          role: json.role,
-          name: json.name,
-        };
-        localStorage.setItem('tccuser', JSON.stringify(userStorage));
-        console.log('Certo!');
-        return;
       }
     }
   }
@@ -134,7 +100,11 @@ const Login = () => {
                   name="password"
                   {...passwordLogin}
                 />
-                <Btn type="submit">Logar</Btn>
+                {loading ? (
+                  <Btn disabled>Logar</Btn>
+                ) : (
+                  <Btn type="submit">Logar</Btn>
+                )}
                 {fetchError && (
                   <p className={styles.fetchError}>{fetchError}</p>
                 )}

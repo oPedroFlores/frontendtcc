@@ -60,6 +60,16 @@ nav .navBtn{
   font-size: 1.8rem;
 }
 
+.links button{
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 30px;
+  font-size: 1rem;
+}
+
 @media only screen and (max-width: 1024px){
   nav .navBtn{
     display: block;
@@ -93,4 +103,14 @@ nav .navBtn{
     font-size: 1.5rem;
   }
 
+  .links{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .links button{
+  margin: 0;
+  }
 }

@@ -1,5 +1,10 @@
 button:disabled{
-  background-color: black;
+  cursor:default;
+  background-color: gray;
+}
+
+button:disabled:hover{
+  transform: initial;
 }
 
 .button{
