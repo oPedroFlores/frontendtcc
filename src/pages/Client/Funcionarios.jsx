@@ -48,7 +48,6 @@ const Funcionarios = () => {
         {!switchButton ? (
           <div className={styles.funcList}>
             <FuncList workers={workers} getWorkers={getWorkers} />
-            {/* Add Funcionário */}
           </div>
         ) : (
           <>Editar</>

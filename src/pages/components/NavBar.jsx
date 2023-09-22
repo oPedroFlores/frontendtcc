@@ -24,7 +24,6 @@ const NavBar = () => {
           <div className={styles.links}>
             <Link to="/">Home</Link>
             <Link to="/planos">Planos</Link>
-            <Link to="/contato">Contato</Link>
             <Link to="/login">Login / Registro</Link>
           </div>
         )}

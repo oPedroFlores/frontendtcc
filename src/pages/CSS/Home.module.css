@@ -1,0 +1,96 @@
+.home{
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--paleta2-cor3);
+}
+
+.homeWrapper{
+    height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.homeSobre{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+    height: 30%;
+}
+
+.homeSobre p {
+    font-size: 1.125rem;
+}
+
+.homeSobre div{
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}
+
+.homeSobre div p{
+    width: 80%;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Cards */
+
+.homePlanos{
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.homeCards{
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.homeSingleCard{
+    border: 1px solid var(--paleta2-cor2);
+    height: 340px;
+    width: 200px;
+    position: relative;
+    border-radius: 15px;
+    text-align: center;
+    background-color: var(--paleta2-cor4);
+}
+
+.homeSingleCard:hover {
+    z-index: 99;
+    cursor: default;
+}
+
+.cardMessage{
+    line-height: 1.25rem;
+    margin-top: 15px;
+}
+
+.cardWorkers{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.cardPrice{
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    font-weight: bold;
+    text-align: center;
+}
+
+.homePlanosSobre{
+    font-size: 1.125rem;
+    text-align: center;
+    width: 30%;
+
+}

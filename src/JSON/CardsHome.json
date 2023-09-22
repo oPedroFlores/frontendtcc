@@ -1,0 +1,26 @@
+[
+    {
+        "index": -1,
+        "title": "Grátis",
+        "message": "Plano de entrada, geralmente escolhido para testar e compreender melhor o sistema!",
+        "workers": "Pode ter até 1 funcionário",
+        "services": "Pode ter até 3 serviços",
+        "price": "GRÁTIS"
+    },
+    {
+        "index": -0,
+        "title": "Standart",
+        "message": "Plano inicial da ONTime. Geralmente utilizado por pequenos negócios!",
+        "workers": "Pode ter até 3 funcionários",
+        "services": "Pode ter até 8 serviços",
+        "price": "15.90"
+    },
+    {
+        "index": 1,
+        "title": "Pro",
+        "message": "Plano profissional da ONTime. É a melhor opção para empresas que buscam profissionalizar o seu ambiente!",
+        "workers": "Sem limite de funcionários",
+        "services": "Sem limite de serviços",
+        "price": "34.90"
+    }
+]
