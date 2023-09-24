@@ -16,6 +16,8 @@ import Dashboard from './pages/Client/ClientDashboard';
 import ClientHome from './pages/Client/ClientHome';
 import Funcionarios from './pages/Client/Funcionarios';
 import Servicos from './pages/Client/Servicos';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter([
   {
@@ -81,5 +83,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT} />
   </React.StrictMode>,
 );

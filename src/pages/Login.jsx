@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import NavBar from './components/NavBar';
-import styles from './CSS Components/Login.module.css';
+import styles from './CSS/Login.module.css';
 import Input from './components/Input';
 import Btn from './components/ButtonComponent';
 import UseForm from '../Hooks/UseForm';
@@ -56,10 +56,7 @@ const Login = () => {
         username: usernameReg.value,
         password: passwordReg.value,
       });
-      const response = await fetch(url, options);
-      console.log(options);
-      const json = await response.json();
-      console.log(json);
+      fetch(url, options);
     }
   }
 

@@ -1,38 +1,39 @@
 import React from 'react';
-import styles from '../CSS/Funcionarios.module.css';
+import styles from '../CSS/Servicos.module.css';
 import Input from '../../../pages/components/Input';
 import Btn from '../../../pages/components/ButtonComponent';
 import UseForm from '../../../Hooks/UseForm';
 import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
+import { DELETE_SERVICE, SET_SERVICE } from '../../../api';
 
-import { DELETE_WORKER, SET_WORKER } from '../../../api';
-const FuncList = ({ workers, getWorkers }) => {
+const ServList = ({ services, getServices }) => {
   const localUserString = window.localStorage.getItem('tccuser');
   const localUser = JSON.parse(localUserString);
   const token = localUser.token;
 
+  const serviceName = UseForm();
+  const servicePrice = UseForm();
+  const serviceDesc = UseForm();
   const [loading, setLoading] = React.useState(false);
-  const workerName = UseForm();
 
-  async function deleteWorker(id, name) {
+  async function deleteService(id, name) {
     const confirm = window.confirm(
-      `Tem certeza que deseja excluir o funcionário ${name} ?`,
+      `Tem certeza que deseja excluir o serviço ${name} ?`,
     );
     if (confirm) {
       const localUserString = window.localStorage.getItem('tccuser');
       const localUser = JSON.parse(localUserString);
       const token = localUser.token;
 
-      const { url, options } = DELETE_WORKER(token, {
-        workerId: id,
+      const { url, options } = DELETE_SERVICE(token, {
+        serviceId: id,
       });
-
       const response = await fetch(url, options);
       const json = await response.json();
       if (response.status === 202) {
-        getWorkers();
-        toast.warning(`Funcionário ${name} deletado!`, {
+        getServices();
+        toast.warning(`Serviço ${name} deletado!`, {
           position: 'bottom-left',
           autoClose: 5000,
           hideProgressBar: false,
@@ -57,25 +58,31 @@ const FuncList = ({ workers, getWorkers }) => {
     }
   }
 
-  function editeWorker(worker) {
-    console.log(worker);
+  function editService(service) {
+    console.log(service);
   }
 
   async function handleSubmitRegister(event) {
     event.preventDefault();
-    const name = workerName.value;
+    const name = serviceName.value;
     if (name.length < 3)
-      return alert('O nome precisa conter pelo menos 3 caracteres!');
+      return alert('O serviço precisa conter pelo menos 3 caracteres!');
 
-    if (workerName.validate()) {
-      const { url, options } = await SET_WORKER(token, {
-        name: workerName.value,
+    if (
+      serviceName.validate() &&
+      servicePrice.validate() &&
+      serviceDesc.validate()
+    ) {
+      const { url, options } = await SET_SERVICE(token, {
+        name: serviceName.value,
+        price: servicePrice.value,
+        desc: serviceDesc.value,
       });
       const response = await fetch(url, options);
       const json = await response.json();
       if (response.status === 201) {
-        getWorkers();
-        toast.info(`Funcionário ${name} criado!`, {
+        getServices();
+        toast.info(`Serviço ${name} criado!`, {
           position: 'bottom-left',
           autoClose: 5000,
           hideProgressBar: false,
@@ -101,15 +108,17 @@ const FuncList = ({ workers, getWorkers }) => {
   }
 
   return (
-    <div className={styles.divWorkersCard}>
+    <div className={styles.divServicesCard}>
       <form onSubmit={handleSubmitRegister}>
-        <div className={styles.workerForm}>
+        <div className={styles.serviceForm}>
           <Input
-            label="Nome do funcionário"
+            label="Nome do serviço"
             type="text"
             name="name"
-            {...workerName}
+            {...serviceName}
           />
+          <Input label="Descrição" type="text" name="desc" {...serviceDesc} />
+          <Input label="Preço" type="number" name="price" {...servicePrice} />
           <div>
             {loading ? (
               <Btn disabled>Cadastrar</Btn>
@@ -119,27 +128,27 @@ const FuncList = ({ workers, getWorkers }) => {
           </div>
         </div>
       </form>
-      {workers
-        ? workers.map((worker, index) => (
+      {services
+        ? services.map((service, index) => (
             <motion.div
               key={index}
-              className={styles.workerCard}
+              className={styles.serviceCard}
               transition={{ duration: 0.7, ease: 'easeInOut' }}
               initial={{ x: 150 + 150 * index }}
               animate={{ x: 0 }}
             >
-              {worker.name}
-              <div className={styles.workerCardActions}>
-                <button onClick={() => editeWorker(worker)}>Editar</button>
-                <button onClick={() => deleteWorker(worker.id, worker.name)}>
+              {service.name}
+              <div className={styles.serviceCardActions}>
+                <button onClick={() => editService(service)}>Editar</button>
+                <button onClick={() => deleteService(service.id, service.name)}>
                   Excluir
                 </button>
               </div>
             </motion.div>
           ))
-        : 'Não há funcionários para serem mostrados!'}
+        : 'Não há serviços para serem mostrados!'}
     </div>
   );
 };
 
-export default FuncList;
+export default ServList;

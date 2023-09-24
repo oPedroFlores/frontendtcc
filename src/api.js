@@ -66,3 +66,59 @@ export function SET_WORKER(token, body) {
     },
   };
 }
+
+export function DELETE_WORKER(token, body) {
+  return {
+    url: API_URL + '/workers',
+    options: {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}
+
+// Services
+
+export function GET_SERVICES(token) {
+  return {
+    url: API_URL + '/services',
+    options: {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    },
+  };
+}
+
+export function SET_SERVICE(token, body) {
+  return {
+    url: API_URL + '/services',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}
+
+export function DELETE_SERVICE(token, body) {
+  return {
+    url: API_URL + '/services',
+    options: {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}

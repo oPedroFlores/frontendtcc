@@ -3,9 +3,17 @@ import ClientNavBar from './Components/ClientNavBar';
 import styles from './CSS/Funcionarios.module.css';
 import { GET_WORKERS } from '../../api';
 import FuncList from './Components/FuncList';
+import { motion } from 'framer-motion';
+
 const Funcionarios = () => {
   const [switchButton, setSwitchButton] = React.useState(0);
   const [workers, setWorkers] = React.useState([]);
+
+  const motionAnimations = {
+    initialPosition: { scale: 0 },
+    variantStart: { scale: 1 },
+    variantStart2: { x: 0, scale: 0.8 },
+  };
 
   function switchButtonFun(option) {
     setSwitchButton(option);
@@ -31,20 +39,28 @@ const Funcionarios = () => {
     <div>
       <ClientNavBar />
       <div className={styles.divFunc}>
-        <div className={styles.switchFunc}>
-          <button
+        <motion.div className={styles.switchFunc}>
+          <motion.button
             onClick={() => switchButtonFun(0)}
             className={`${switchButton ? `${styles.disabledButton}` : ''}`}
+            variants={motionAnimations}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            initial="initialPosition"
+            animate={`${switchButton ? 'variantStart2' : 'variantStart'}`}
           >
             Listar
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={() => switchButtonFun(1)}
             className={`${switchButton ? '' : `${styles.disabledButton}`}`}
+            variants={motionAnimations}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            initial="initialPosition"
+            animate={`${switchButton ? 'variantStart' : 'variantStart2'}`}
           >
             Editar
-          </button>
-        </div>
+          </motion.button>
+        </motion.div>
         {!switchButton ? (
           <div className={styles.funcList}>
             <FuncList workers={workers} getWorkers={getWorkers} />
