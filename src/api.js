@@ -122,3 +122,17 @@ export function DELETE_SERVICE(token, body) {
     },
   };
 }
+
+export function UPDATE_SERVICE(token, body) {
+  return {
+    url: API_URL + '/services',
+    options: {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}

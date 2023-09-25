@@ -18,6 +18,7 @@ import Funcionarios from './pages/Client/Funcionarios';
 import Servicos from './pages/Client/Servicos';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Agendamentos from './pages/Client/Agendamentos';
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: 'cadastrar/servico',
         element: <Servicos />,
+      },
+      {
+        path: 'agenda',
+        element: <Agendamentos />,
       },
     ],
   },

@@ -34,10 +34,10 @@ export const UserStorage = ({ children }) => {
           navigate('/perfil');
           break;
         case 1:
-          navigate('/client/home');
+          navigate('/client/dashboard');
           break;
         case 2:
-          navigate('/client/home');
+          navigate('/client/dashboard');
           break;
 
         default:
@@ -91,10 +91,10 @@ export const UserStorage = ({ children }) => {
                 navigate('/perfil');
                 break;
               case 1:
-                navigate('/client/home');
+                navigate('/client/dashboard');
                 break;
               case 2:
-                navigate('/client/home');
+                navigate('/client/dashboard');
                 break;
 
               default:

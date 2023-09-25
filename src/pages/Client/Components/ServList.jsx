@@ -7,7 +7,12 @@ import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
 import { DELETE_SERVICE, SET_SERVICE } from '../../../api';
 
-const ServList = ({ services, getServices }) => {
+const ServList = ({
+  services,
+  getServices,
+  setSelectedServiceId,
+  setSwitchButton,
+}) => {
   const localUserString = window.localStorage.getItem('tccuser');
   const localUser = JSON.parse(localUserString);
   const token = localUser.token;
@@ -59,7 +64,8 @@ const ServList = ({ services, getServices }) => {
   }
 
   function editService(service) {
-    console.log(service);
+    setSwitchButton(1);
+    setSelectedServiceId(service);
   }
 
   async function handleSubmitRegister(event) {
@@ -109,7 +115,7 @@ const ServList = ({ services, getServices }) => {
 
   return (
     <div className={styles.divServicesCard}>
-      <form onSubmit={handleSubmitRegister}>
+      <form onSubmit={handleSubmitRegister} autocomplete="off">
         <div className={styles.serviceForm}>
           <Input
             label="Nome do serviço"
@@ -137,9 +143,10 @@ const ServList = ({ services, getServices }) => {
               initial={{ x: 150 + 150 * index }}
               animate={{ x: 0 }}
             >
-              {service.name}
+              <h2>{service.name}</h2>
+
               <div className={styles.serviceCardActions}>
-                <button onClick={() => editService(service)}>Editar</button>
+                <button onClick={() => editService(service.id)}>Editar</button>
                 <button onClick={() => deleteService(service.id, service.name)}>
                   Excluir
                 </button>

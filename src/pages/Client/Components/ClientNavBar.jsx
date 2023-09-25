@@ -1,33 +1,61 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import stylesClientNavBar from './CSS/ClientNavBar.module.css';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { UserContext } from '../../../UserContext';
+
 const NavBar = () => {
   const { data, userLogout } = React.useContext(UserContext) || {};
   const navRef = React.useRef();
   const showNavBar = () => {
     navRef.current.classList.toggle(`${stylesClientNavBar.responsive_nav}`);
   };
+
+  const location = useLocation();
+
   return (
     <nav className={stylesClientNavBar.navBar}>
-      <h2>ONTime</h2>
-      {data ? <h2>{data.username}</h2> : ''}
+      <h2>ONTime {data ? data.username : ''} </h2>
       <div ref={navRef} className={stylesClientNavBar.navDiv}>
         {data ? (
           <div className={stylesClientNavBar.links}>
-            <Link to="/client/dashboard" className={stylesClientNavBar.navA}>
+            <Link
+              to="/client/dashboard"
+              className={`${stylesClientNavBar.navA} ${
+                location.pathname === '/client/dashboard'
+                  ? stylesClientNavBar.activedLink
+                  : ''
+              }`}
+            >
               Dashboard
             </Link>
             <Link
+              to="/client/agenda"
+              className={`${stylesClientNavBar.navA} ${
+                location.pathname === '/client/agenda'
+                  ? stylesClientNavBar.activedLink
+                  : ''
+              }`}
+            >
+              Agenda
+            </Link>
+            <Link
               to="/client/cadastrar/funcionario"
-              className={stylesClientNavBar.navA}
+              className={`${stylesClientNavBar.navA} ${
+                location.pathname === '/client/cadastrar/funcionario'
+                  ? stylesClientNavBar.activedLink
+                  : ''
+              }`}
             >
               Funcionários
             </Link>
             <Link
               to="/client/cadastrar/servico"
-              className={stylesClientNavBar.navA}
+              className={`${stylesClientNavBar.navA} ${
+                location.pathname === '/client/cadastrar/servico'
+                  ? stylesClientNavBar.activedLink
+                  : ''
+              }`}
             >
               Serviços
             </Link>

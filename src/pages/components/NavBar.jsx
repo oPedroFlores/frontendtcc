@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styles from '../CSS Components/NavBar.module.css';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { UserContext } from '../../UserContext';
@@ -10,21 +10,57 @@ const NavBar = () => {
   const showNavBar = () => {
     navRef.current.classList.toggle(`${styles.responsive_nav}`);
   };
+
+  const location = useLocation();
+
   return (
     <nav className={styles.navBar}>
       <h2>ONTime</h2>
       <div ref={navRef} className={styles.navDiv}>
         {data ? (
           <div className={styles.links}>
-            <Link to="/agendamentos">Agendamentos</Link>
-            <Link to="/perfil">{data.username}</Link>
+            <Link
+              to="/agendamentos"
+              className={
+                location.pathname === '/agendamentos' ? styles.activedLink : ''
+              }
+            >
+              Agendamentos
+            </Link>
+            <Link
+              to="/perfil"
+              className={
+                location.pathname === '/perfil' ? styles.activedLink : ''
+              }
+            >
+              {data.username}
+            </Link>
             <button onClick={userLogout}>Logout</button>
           </div>
         ) : (
           <div className={styles.links}>
-            <Link to="/">Home</Link>
-            <Link to="/planos">Planos</Link>
-            <Link to="/login">Login / Registro</Link>
+            <Link
+              to="/"
+              className={location.pathname === '/' ? styles.activedLink : ''}
+            >
+              Home
+            </Link>
+            <Link
+              to="/planos"
+              className={
+                location.pathname === '/planos' ? styles.activedLink : ''
+              }
+            >
+              Planos
+            </Link>
+            <Link
+              to="/login"
+              className={
+                location.pathname === '/login' ? styles.activedLink : ''
+              }
+            >
+              Login / Registro
+            </Link>
           </div>
         )}
         <button

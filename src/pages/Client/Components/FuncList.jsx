@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
 
 import { DELETE_WORKER, SET_WORKER } from '../../../api';
-const FuncList = ({ workers, getWorkers }) => {
+const FuncList = ({ workers, getWorkers, setSelectedServiceId }) => {
   const localUserString = window.localStorage.getItem('tccuser');
   const localUser = JSON.parse(localUserString);
   const token = localUser.token;
@@ -102,7 +102,7 @@ const FuncList = ({ workers, getWorkers }) => {
 
   return (
     <div className={styles.divWorkersCard}>
-      <form onSubmit={handleSubmitRegister}>
+      <form onSubmit={handleSubmitRegister} autocomplete="off">
         <div className={styles.workerForm}>
           <Input
             label="Nome do funcionário"
@@ -130,7 +130,7 @@ const FuncList = ({ workers, getWorkers }) => {
             >
               {worker.name}
               <div className={styles.workerCardActions}>
-                <button onClick={() => editeWorker(worker)}>Editar</button>
+                <button onClick={() => editeWorker(worker.id)}>Editar</button>
                 <button onClick={() => deleteWorker(worker.id, worker.name)}>
                   Excluir
                 </button>

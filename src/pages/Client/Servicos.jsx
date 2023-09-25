@@ -4,10 +4,18 @@ import styles from './CSS/Servicos.module.css';
 import { motion } from 'framer-motion';
 import ServList from './Components/ServList';
 import { GET_SERVICES } from '../../api';
+import EditServ from './Components/EditServ';
 
 const Servicos = () => {
   const [switchButton, setSwitchButton] = React.useState(0);
   const [services, setServices] = React.useState([]);
+  // Edit form
+  const [selectedServiceId, setSelectedServiceId] = React.useState();
+
+  const handleServiceSelectChange = (event) => {
+    const selectedId = Number(event.target.value);
+    setSelectedServiceId(selectedId);
+  };
 
   function switchButtonFun(option) {
     setSwitchButton(option);
@@ -22,6 +30,7 @@ const Servicos = () => {
 
     const response = await fetch(url, options);
     const jsonRes = await response.json();
+    setSelectedServiceId(jsonRes[0].id);
     setServices(jsonRes);
   }
 
@@ -49,10 +58,42 @@ const Servicos = () => {
         </motion.div>
         {!switchButton ? (
           <div className={styles.servList}>
-            <ServList services={services} getServices={getServices} />
+            <ServList
+              services={services}
+              getServices={getServices}
+              setSelectedServiceId={setSelectedServiceId}
+              setSwitchButton={setSwitchButton}
+            />
           </div>
         ) : (
-          <>Editar</>
+          <div className={styles.editServ}>
+            <select
+              name="serviceSelect"
+              id="serviceSelect"
+              value={selectedServiceId}
+              onChange={handleServiceSelectChange}
+            >
+              <option value="" selected="selected" disabled>
+                Selecione um serviço
+              </option>
+              {services.map((service) => (
+                <option
+                  key={service.id}
+                  value={service.id}
+                  priceValue={service.price}
+                  nameValue={service.name}
+                  descriptionValue={service.description}
+                >
+                  {service.name}
+                </option>
+              ))}
+            </select>
+            <EditServ
+              selectedServiceId={selectedServiceId}
+              services={services}
+              getServices={getServices}
+            />
+          </div>
         )}
       </section>
     </>

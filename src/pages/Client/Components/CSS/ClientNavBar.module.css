@@ -44,8 +44,8 @@
     transition: .3s all ease;
   }
   
-  .navBar .navA:hover{
-    color: var(--cor-preta);
+  .navBar .navA:hover, .activedLink{
+    color: var(--cor-preta) !important;
     background-color: var(--cor-bege-escuro);
   }
   
@@ -75,6 +75,7 @@
       display: block;
     }
     .navBar .navDiv{
+      z-index: 99;
       position: fixed;
       top: 0;
       right: 0;
@@ -114,4 +115,3 @@
     margin: 0;
     }
   }
-  

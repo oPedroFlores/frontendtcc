@@ -44,7 +44,7 @@ nav a{
   transition: .3s all ease;
 }
 
-nav a:hover{
+nav a:hover, .activedLink{
   color: var(--cor-preta);
   background-color: var(--cor-bege-escuro);
 }
@@ -75,6 +75,7 @@ nav .navBtn{
     display: block;
   }
   nav .navDiv{
+    z-index: 99;
     position: fixed;
     top: 0;
     right: 0;
