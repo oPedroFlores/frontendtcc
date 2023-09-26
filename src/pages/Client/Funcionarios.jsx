@@ -4,10 +4,19 @@ import styles from './CSS/Funcionarios.module.css';
 import { GET_WORKERS } from '../../api';
 import FuncList from './Components/FuncList';
 import { motion } from 'framer-motion';
+import EditWorker from './Components/EditWorker';
 
 const Funcionarios = () => {
   const [switchButton, setSwitchButton] = React.useState(0);
   const [workers, setWorkers] = React.useState([]);
+
+  // Edit form
+  const [selectedWorkerId, setSelectedWorkerId] = React.useState();
+
+  const handleWorkerSelectChange = (event) => {
+    const selectedId = Number(event.target.value);
+    setSelectedWorkerId(selectedId);
+  };
 
   const motionAnimations = {
     initialPosition: { scale: 0 },
@@ -63,10 +72,41 @@ const Funcionarios = () => {
         </motion.div>
         {!switchButton ? (
           <div className={styles.funcList}>
-            <FuncList workers={workers} getWorkers={getWorkers} />
+            <FuncList
+              workers={workers}
+              getWorkers={getWorkers}
+              setSelectedWorkerId={setSelectedWorkerId}
+              setSwitchButton={setSwitchButton}
+            />
           </div>
         ) : (
-          <>Editar</>
+          // Editar
+          <div className={styles.editFunc}>
+            <select
+              name="workerSelect"
+              id="workerSelect"
+              value={selectedWorkerId}
+              onChange={handleWorkerSelectChange}
+            >
+              <option value="" selected="selected" disabled>
+                Selecione um trabalhador
+              </option>
+              {workers.map((worker) => (
+                <option
+                  key={worker.id}
+                  value={worker.id}
+                  nameValue={worker.name}
+                >
+                  {worker.name}
+                </option>
+              ))}
+            </select>
+            <EditWorker
+              selectedWorkerId={selectedWorkerId}
+              workers={workers}
+              getWorkers={getWorkers}
+            />
+          </div>
         )}
       </div>
     </div>

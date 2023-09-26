@@ -137,26 +137,32 @@ const ServList = ({
           </div>
         </div>
       </form>
-      {services
-        ? services.map((service, index) => (
-            <motion.div
-              key={index}
-              className={styles.serviceCard}
-              transition={{ duration: 0.7, ease: 'easeInOut' }}
-              initial={{ x: 150 + 150 * index }}
-              animate={{ x: 0 }}
-            >
-              <h2>{service.name}</h2>
+      <div className={styles.listedServices}>
+        {services
+          ? services.map((service, index) => (
+              <motion.div
+                key={index}
+                className={styles.serviceCard}
+                transition={{ duration: 0.7, ease: 'easeInOut' }}
+                initial={{ x: 150 + 150 * index }}
+                animate={{ x: 0 }}
+              >
+                <h2>{service.name}</h2>
 
-              <div className={styles.serviceCardActions}>
-                <button onClick={() => editService(service.id)}>Editar</button>
-                <button onClick={() => deleteService(service.id, service.name)}>
-                  Excluir
-                </button>
-              </div>
-            </motion.div>
-          ))
-        : 'Não há serviços para serem mostrados!'}
+                <div className={styles.serviceCardActions}>
+                  <button onClick={() => editService(service.id)}>
+                    Editar
+                  </button>
+                  <button
+                    onClick={() => deleteService(service.id, service.name)}
+                  >
+                    Excluir
+                  </button>
+                </div>
+              </motion.div>
+            ))
+          : 'Não há serviços para serem mostrados!'}
+      </div>
     </div>
   );
 };

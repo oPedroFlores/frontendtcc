@@ -7,7 +7,13 @@ import { motion } from 'framer-motion';
 import { toast } from 'react-toastify';
 
 import { DELETE_WORKER, SET_WORKER } from '../../../api';
-const FuncList = ({ workers, getWorkers, setSelectedServiceId }) => {
+const FuncList = ({
+  workers,
+  getWorkers,
+  setSwitchButton,
+  setSelectedWorkerId,
+}) => {
+  console.log(workers);
   const localUserString = window.localStorage.getItem('tccuser');
   const localUser = JSON.parse(localUserString);
   const token = localUser.token;
@@ -57,8 +63,9 @@ const FuncList = ({ workers, getWorkers, setSelectedServiceId }) => {
     }
   }
 
-  function editeWorker(worker) {
-    console.log(worker);
+  function editWorker(worker) {
+    setSwitchButton(1);
+    setSelectedWorkerId(worker);
   }
 
   async function handleSubmitRegister(event) {
@@ -120,25 +127,27 @@ const FuncList = ({ workers, getWorkers, setSelectedServiceId }) => {
           </div>
         </div>
       </form>
-      {workers
-        ? workers.map((worker, index) => (
-            <motion.div
-              key={index}
-              className={styles.workerCard}
-              transition={{ duration: 0.7, ease: 'easeInOut' }}
-              initial={{ x: 150 + 150 * index }}
-              animate={{ x: 0 }}
-            >
-              {worker.name}
-              <div className={styles.workerCardActions}>
-                <button onClick={() => editeWorker(worker.id)}>Editar</button>
-                <button onClick={() => deleteWorker(worker.id, worker.name)}>
-                  Excluir
-                </button>
-              </div>
-            </motion.div>
-          ))
-        : 'Não há funcionários para serem mostrados!'}
+      <div className={styles.listedWorkers}>
+        {workers
+          ? workers.map((worker, index) => (
+              <motion.div
+                key={index}
+                className={styles.workerCard}
+                transition={{ duration: 0.7, ease: 'easeInOut' }}
+                initial={{ x: 150 + 150 * index }}
+                animate={{ x: 0 }}
+              >
+                {worker.name}
+                <div className={styles.workerCardActions}>
+                  <button onClick={() => editWorker(worker.id)}>Editar</button>
+                  <button onClick={() => deleteWorker(worker.id, worker.name)}>
+                    Excluir
+                  </button>
+                </div>
+              </motion.div>
+            ))
+          : 'Não há funcionários para serem mostrados!'}
+      </div>
     </div>
   );
 };

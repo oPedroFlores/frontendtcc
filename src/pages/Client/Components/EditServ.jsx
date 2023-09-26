@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import Input from '../../components/Input';
 import Btn from '../../components/ButtonComponent';
 import UseForm from '../../../Hooks/UseForm';
@@ -78,7 +78,7 @@ const EditServ = ({ selectedServiceId, services, getServices }) => {
       />
       <Input
         label="Descrição"
-        type="text"
+        type="textarea"
         name="description"
         {...servDescription}
       />

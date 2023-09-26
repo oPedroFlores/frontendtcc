@@ -2,221 +2,152 @@
   height: calc(100vh - 80px);
   width: 100%;
   background-color: var(--paleta3-cor2);
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
 }
 
 .switchFunc{
-  height: 200px;
-  width: 400px;
-  border-radius: 5px;
-  position: fixed;
-  top: 50%;
-  flex-direction: column;
-  left: 0;
-  justify-content: center;
+  width: 20%;
   display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
   align-items: center;
-  gap: 15px;
 }
 
 .switchFunc button{
-  box-shadow: 5px 5px 5px 0 black;
-  width: 45%;
-  cursor: pointer;
-  transition: .5s ease all;
-  border: none;
-  color: white;
-  background: var(--paleta3-cor1);
-  border-radius: 5px;
-  height: 80%;
-  font-size: 1.25rem;
+height: 15%;
+width: 50%;
+border-radius: 5px;
+background: var(--paleta3-cor1);
+border: none;
+outline: none;
+color: white;
+font-size: 1.5rem;
+cursor: pointer;
+transition: .5s ease all;
 }
 
 .disabledButton{
-  transform: scale(0.8);
-  background: var(--paleta3-cor2);
+transform: scale(0.8);
+background: var(--paleta3-cor2);
 }
 
 .disabledButton:hover{
-  transform: scale(0.85);
+transform: scale(0.85);
+}
+
+.funcList, .editFunc{
+  overflow-x: hidden;
+  padding: 20px;
+  border-radius: 10px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  background: var(--paleta3-cor1);
+  height: 80%;
+  width: 75%;
+  overflow-y: scroll;
+  margin-right: 5%;
+  position: relative;
+}
+
+.divWorkersCard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .workerForm{
-  display: flex;
-  gap: 5rem;
-  align-items: center;
-  justify-content: center;
+  padding: 40px 60px;
+  margin-top: 15px;
   border-radius: 5px;
-  color: white;
   background-color: var(--cor-clay-5);
-  border: 1px solid black;
-  padding: 20px 50px;
-}
-
-.workerForm input{
-  border: 1px solid black;
-  border-radius: 5px;
-  width: 120%;
-}
-
-/* Cards */
-.divWorkersCard{
-  height: 500px;
-  width: 50vw;
-  box-sizing: content-box;
-  border-radius: 15px;
-  padding: 50px;
-  background-color: var(--paleta3-cor1);
+  width: 100%;
   display: flex;
-  overflow-x: hidden;
-  overflow-y: scroll;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
+}
+
+.listedWorkers{
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .workerCard{
-  border: 1px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 30px;
-  font-size: 1.5rem;
-  height: 20%;
   background-color: var(--cor-clay-5);
+  width: 60%;
   border-radius: 5px;
-  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 2rem;
   font-weight: bold;
 }
 
 .workerCardActions{
   width: 30%;
-  gap: 1rem;
+  height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 180%;
+  gap: .5rem;
+  justify-content: space-between;
 }
 
 .workerCardActions button{
   width: 50%;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: .5s ease all;
-  box-shadow: 3px 3px 5px 0 black;
   border: none;
   border-radius: 5px;
-  height: 100%;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: .5s ease all;
+  box-shadow: 3px 3px 5px 0 black;
 }
 
 .workerCardActions button:hover{
   transform: scale(1.05);
 }
 
-* {
-  scrollbar-width: auto;
-  scrollbar-color: #fff;
+/* Edit */
+
+.editFunc{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 10px;
+.editFunc form{
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  height: 100%;
 }
 
-*::-webkit-scrollbar-track {
-  background: transparent;
+.editFunc form input{
+  font-size: 1.25rem;
+  height: 50px;
+  width: 150%;
+  padding: 20px 20px 20px 0px;
+  resize: both;
 }
 
-*::-webkit-scrollbar-thumb {
-  background-color: #fff;
-  border-radius: 10px;
+.editFunc select{
+  width: 30%;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  height: 50px;
 }
 
-
-
-@media (max-width: 1400px){
-  
-  .workerForm{
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    width: 100%;
-  }  
-  .workerCard{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-  }
-  
-  .workerCardActions{
-    height: 100px !important;
-    width: 100%;
-  }
-  
-  .workerCard button{
-    width: 30%;
-    height: 200%;
-  }
-  .switchFunc{
-    left: 0;
-    flex-direction: column;
-    top: 50%;
-    height: 30%;
-    width: 25%;
-  }
-  }
-  @media (max-width: 780px){
-    .switchFunc{
-      top: 80px;
-      flex-direction: row;
-      height: 100px;
-      width: 200px;
-      left: 40%;
-    }
-    .workerCard{
-      padding: 0;
-      height: 100%;
-    }
-    .divWorkersCard{
-      margin-top: 100px;
-      height: 400px;
-    }
-    .workerCardActions{
-      height: 80px;
-    }
-    .workerCardActions button{
-      height: 50px;
-    }
-    .editServ{
-      margin-top: 50px;
-      height: 380px;
-    }
-  }
-  
-  
-  @media (max-width: 500px){
-    .switchFunc{
-      left: 30%;
-    }
-    
-    .workerCardActions{
-      height: 100px;
-      width: 200px !important;
-    }
-    .workerCardActions button{
-      height: 50px;
-      width: 300%;
-    }
-    .editServ input{
-      width: 100%;
-    }
-    .editServ select{
-      width: 100%;
-    }
-  }
