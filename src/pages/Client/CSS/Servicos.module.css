@@ -10,11 +10,14 @@
 }
 
 .switchServ{
-  height: 100px;
-  width: 400px;
+  height: 200px;
+  left: 0;
+  position: absolute;
+  top: 50%;
+  width: 300px;
   border-radius: 5px;
-  position: fixed;
-  top: 90px;
+  flex-direction: column ;
+  transform: translateY(-50%); 
   justify-content: center;
   display: flex;
   align-items: center;
@@ -166,4 +169,80 @@
   border-radius: 5px;
   font-size: 1rem;
   text-align: center;
+}
+
+@media (max-width: 1400px){
+  
+.serviceForm{
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}  
+.serviceCard{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.serviceCardActions{
+  width: 100%;
+}
+
+.serviceCard button{
+  width: 30%;
+}
+}
+
+@media (max-width: 1200px){
+  .switchServ{
+    right: 50px;
+    width: 20%;
+  }
+}
+
+@media (max-width: 780px){
+  .switchServ{
+    top: 50px;
+    flex-direction: row;
+    height: 100px;
+    width: 200px;
+    left: 40%;
+  }
+  .divServicesCard{
+    margin-top: 100px;
+    height: 400px;
+  }
+  .serviceCardActions{
+    height: 30px;
+  }
+  .serviceCardActions button{
+    height: 50px;
+  }
+  .editServ{
+    margin-top: 50px;
+    height: 380px;
+  }
+}
+
+
+@media (max-width: 500px){
+  .switchServ{
+    left: 33%;
+  }
+  
+  .serviceCardActions{
+    height: 200%;
+    width: 200px !important;
+  }
+  .serviceCardActions button{
+    height: 60px;
+    width: 350%;
+  }
+  .editServ input{
+    width: 100%;
+  }
+  .editServ select{
+    width: 100%;
+  }
 }

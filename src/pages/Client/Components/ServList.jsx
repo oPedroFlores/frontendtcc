@@ -87,6 +87,9 @@ const ServList = ({
       const response = await fetch(url, options);
       const json = await response.json();
       if (response.status === 201) {
+        serviceName.setValue('');
+        serviceDesc.setValue('');
+        servicePrice.setValue('');
         getServices();
         toast.info(`Serviço ${name} criado!`, {
           position: 'bottom-left',

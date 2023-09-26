@@ -74,6 +74,7 @@ const FuncList = ({ workers, getWorkers, setSelectedServiceId }) => {
       const response = await fetch(url, options);
       const json = await response.json();
       if (response.status === 201) {
+        workerName.setValue('');
         getWorkers();
         toast.info(`Funcionário ${name} criado!`, {
           position: 'bottom-left',

@@ -9,11 +9,13 @@
 }
 
 .switchFunc{
-  height: 100px;
+  height: 200px;
   width: 400px;
   border-radius: 5px;
   position: fixed;
-  top: 90px;
+  top: 50%;
+  flex-direction: column;
+  left: 0;
   justify-content: center;
   display: flex;
   align-items: center;
@@ -69,6 +71,7 @@
   padding: 50px;
   background-color: var(--paleta3-cor1);
   display: flex;
+  overflow-x: hidden;
   overflow-y: scroll;
   flex-direction: column;
   align-items: center;
@@ -132,3 +135,88 @@
   background-color: #fff;
   border-radius: 10px;
 }
+
+
+
+@media (max-width: 1400px){
+  
+  .workerForm{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+  }  
+  .workerCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .workerCardActions{
+    height: 100px !important;
+    width: 100%;
+  }
+  
+  .workerCard button{
+    width: 30%;
+    height: 200%;
+  }
+  .switchFunc{
+    left: 0;
+    flex-direction: column;
+    top: 50%;
+    height: 30%;
+    width: 25%;
+  }
+  }
+  @media (max-width: 780px){
+    .switchFunc{
+      top: 80px;
+      flex-direction: row;
+      height: 100px;
+      width: 200px;
+      left: 40%;
+    }
+    .workerCard{
+      padding: 0;
+      height: 100%;
+    }
+    .divWorkersCard{
+      margin-top: 100px;
+      height: 400px;
+    }
+    .workerCardActions{
+      height: 80px;
+    }
+    .workerCardActions button{
+      height: 50px;
+    }
+    .editServ{
+      margin-top: 50px;
+      height: 380px;
+    }
+  }
+  
+  
+  @media (max-width: 500px){
+    .switchFunc{
+      left: 30%;
+    }
+    
+    .workerCardActions{
+      height: 100px;
+      width: 200px !important;
+    }
+    .workerCardActions button{
+      height: 50px;
+      width: 300%;
+    }
+    .editServ input{
+      width: 100%;
+    }
+    .editServ select{
+      width: 100%;
+    }
+  }
