@@ -7,18 +7,15 @@ import { toast } from 'react-toastify';
 
 const EditWorker = ({ selectedWorkerId, workers, getWorkers }) => {
   let worker = workers.find((worker) => worker.id === selectedWorkerId);
+  const [services, setServices] = React.useState([]);
 
   // Use o UseForm com o valor inicial
   let workerName = UseForm('');
-  // let servPrice = UseForm('');
-  // let servDescription = UseForm('');
 
   useEffect(() => {
-    // Atualize os valores dos campos do formulário quando selectedServiceId mudar
+    // Atualize os valores dos campos do formulário quando selectedWorkerId mudar
     workerName.setValue(worker ? worker.name : '');
-    console.log(worker);
-    // servPrice.setValue(service ? service.price : '');
-    // servDescription.setValue(service ? service.description : '');
+    setServices(worker ? worker.services : []);
   }, [selectedWorkerId]);
 
   async function handleEditWorker(event) {
@@ -72,7 +69,9 @@ const EditWorker = ({ selectedWorkerId, workers, getWorkers }) => {
       className={styles.editWorkerForm}
     >
       <Input label="Nome" type="text" name="name" {...workerName} />
-
+      {services
+        ? services.map((service) => <p key={service.id}>{service.id}</p>)
+        : 'Sem serviços'}
       <Btn>Atualizar</Btn>
     </form>
   );

@@ -13,7 +13,6 @@ const FuncList = ({
   setSwitchButton,
   setSelectedWorkerId,
 }) => {
-  console.log(workers);
   const localUserString = window.localStorage.getItem('tccuser');
   const localUser = JSON.parse(localUserString);
   const token = localUser.token;
