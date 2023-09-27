@@ -126,6 +126,8 @@ transform: scale(0.85);
 }
 
 .editFunc form{
+  border-radius: 10px;
+  background-color: var(--cor-clay-5);
   margin-top: 25px;
   display: flex;
   flex-direction: column;
@@ -153,4 +155,40 @@ transform: scale(0.85);
 
 .disabledAddService{
   background-color: red;
+}
+
+.editFunc form p{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.workerServicesDiv{
+  height: 40%;
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  gap: 2rem;
+  overflow-x: scroll;
+}
+
+.workerServicesDiv div{
+  width: 150px;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-radius: 5px;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.addedDiv{
+  background-color: var(--paleta3-cor1);
+}
+
+.notAddedDiv{
+  background-color:darkgray;
 }

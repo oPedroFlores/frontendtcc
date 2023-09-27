@@ -81,6 +81,34 @@ export function DELETE_WORKER(token, body) {
   };
 }
 
+export function WORKER_SERVICES(token, body) {
+  return {
+    url: API_URL + '/workerservices',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}
+
+export function UPDATE_WORKER(token, body) {
+  return {
+    url: API_URL + '/workers',
+    options: {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}
+
 // Services
 
 export function GET_SERVICES(token) {

@@ -23,7 +23,7 @@ const EditServ = ({ selectedServiceId, services, getServices }) => {
   async function handleEditServ(event) {
     event.preventDefault();
     const confirm = window.confirm(
-      `Tem certeza que deseja excluir o funcionário ${servName.value} ?`,
+      `Tem certeza que deseja excluir o serviço ${servName.value} ?`,
     );
     if (confirm) {
       const localUserString = window.localStorage.getItem('tccuser');

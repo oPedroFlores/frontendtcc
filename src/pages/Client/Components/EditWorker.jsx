@@ -4,122 +4,139 @@ import Btn from '../../components/ButtonComponent';
 import UseForm from '../../../Hooks/UseForm';
 import styles from '../CSS/Funcionarios.module.css';
 import { toast } from 'react-toastify';
-import { GET_SERVICES } from '../../../api';
+import { UPDATE_WORKER, WORKER_SERVICES } from '../../../api';
 
 const EditWorker = ({ selectedWorkerId, workers, getWorkers }) => {
-  let worker = workers.find((worker) => worker.id === selectedWorkerId);
+  let worker = workers.find((worker) => worker.id === selectedWorkerId) || [];
   const [services, setServices] = React.useState([]);
-  const [allServices, setAllServices] = React.useState([]);
-  const [filteredServices, setFilteredServices] = React.useState([]);
-
+  const [workerServices, setWorkerServices] = React.useState([]);
 
   // Token
   const localUserString = window.localStorage.getItem('tccuser');
   const localUser = JSON.parse(localUserString);
   const token = localUser.token;
 
-  // Definindo todos os serviços deste cliente
-  async function getAllServices(){
-    const { url, options } = GET_SERVICES(token);
-
-    const response = await fetch(url, options);
-    const jsonRes = await response.json();
-    setAllServices(jsonRes)
-  }
-
-  React.useState(()=> {
-    getAllServices();
-    if (allServices && services) {
-      // Filtrar os serviços que não estão em "services"
-      const servicesNotInList = allServices.filter((service) => !services.includes(service.serviceID));
-      setFilteredServices(servicesNotInList);
-    } else {
-      setFilteredServices(allServices);
-    }
-  },[allServices, services])
-
   // Use o UseForm com o valor inicial
   let workerName = UseForm('');
 
+  // Definindo todos os serviços deste cliente
+  async function getAllServices() {
+    if (!worker) return;
+    const { url, options } = WORKER_SERVICES(token, {
+      workerId: worker.id,
+    });
+    const response = await fetch(url, options);
+    let jsonRes = await response.json();
+    setWorkerServices(jsonRes);
+  }
+
   useEffect(() => {
+    getAllServices();
     // Atualize os valores dos campos do formulário quando selectedWorkerId mudar
+    if (!worker) return;
     workerName.setValue(worker ? worker.name : '');
-    setServices(worker ? worker.services : []);
-  }, [selectedWorkerId]);
+    if (worker) {
+      setServices(worker.services);
+    } else {
+      setServices([]);
+    }
+  }, [selectedWorkerId, services, worker]);
 
   async function handleEditWorker(event) {
     event.preventDefault();
     const confirm = window.confirm(
-      `Tem certeza que deseja excluir o funcionário ${workerName.value} ?`,
+      `Tem certeza que deseja alterar o funcionário ${worker.name} ?`,
     );
     if (confirm) {
+      const localUserString = window.localStorage.getItem('tccuser');
+      const localUser = JSON.parse(localUserString);
+      const token = localUser.token;
 
-      // const { url, options } = UPDATE_SERVICE(token, {
-      //   id: worker.id,
-      //   name: workerName.value,
-      // });
+      for (const serv of workerServices) {
+        serv.workerID = worker.id;
+        serv.serviceID = serv.id;
+      }
 
-      // const response = await fetch(url, options);
-      // const json = await response.json();
-      // if (response.status === 200) {
-      //   getServices();
-      //   toast.info(`Funcionário ${servName.value} atualizado!`, {
-      //     position: 'bottom-left',
-      //     autoClose: 5000,
-      //     hideProgressBar: false,
-      //     closeOnClick: true,
-      //     pauseOnHover: true,
-      //     draggable: true,
-      //     progress: undefined,
-      //     theme: 'dark',
-      //   });
-      // } else {
-      //   toast.error(`ERRO! ${json.message}`, {
-      //     position: 'bottom-left',
-      //     autoClose: 5000,
-      //     hideProgressBar: false,
-      //     closeOnClick: true,
-      //     pauseOnHover: true,
-      //     draggable: true,
-      //     progress: undefined,
-      //     theme: 'dark',
-      //   });
-      // }
+      const { url, options } = UPDATE_WORKER(token, {
+        name: workerName.value,
+        id: worker.id,
+        services: [workerServices],
+      });
+      const response = await fetch(url, options);
+      const json = await response.json();
+      console.log(json);
+    }
+
+    // const response = await fetch(url, options);
+    // const json = await response.json();
+    // if (response.status === 200) {
+    //   getServices();
+    //   toast.info(`Funcionário ${servName.value} atualizado!`, {
+    //     position: 'bottom-left',
+    //     autoClose: 5000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: 'dark',
+    //   });
+    // } else {
+    //   toast.error(`ERRO! ${json.message}`, {
+    //     position: 'bottom-left',
+    //     autoClose: 5000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: 'dark',
+    //   });
+    // }
+  }
+
+  const [serviceAddedChanged, setServiceAddedChanged] = React.useState(false);
+
+  function changeAdded(id) {
+    for (const workerService of workerServices) {
+      if (workerService.id === id) {
+        if (workerService.added === 'true') {
+          workerService.added = 'false';
+          setServiceAddedChanged(!serviceAddedChanged);
+        } else {
+          workerService.added = 'true';
+          setServiceAddedChanged(!serviceAddedChanged);
+        }
+      }
     }
   }
 
-  function verificar() {
-    console.log("Services")
-    console.log(services)
-    console.log("All services:")
-    console.log(allServices)
-    console.log(services)
-    console.log("filteredServices:")
-    console.log(filteredServices)
-  }
-
   return (
-    <div>
-      
     <form
       onSubmit={handleEditWorker}
       autocomplete="off"
       className={styles.editWorkerForm}
     >
       <Input label="Nome" type="text" name="name" {...workerName} />
-      <div>
-      {allServices
-        ? allServices.map((service) => 
-        <div key={service.id} className={services.includes(service.id) ? `${styles.disabledAddService}` : ''}>
-          <p>{service.name}</p>
-            <button onClick={verificar}>Adicionar</button>
-          </div>
-        )
-        : 'Sem serviços para adicionar'}
-        </div>
+      <p>Serviços</p>
+      <div className={styles.workerServicesDiv}>
+        {workerServices
+          ? workerServices.map((service, index) => (
+              <div
+                className={
+                  service.added === 'true'
+                    ? `${styles.addedDiv}`
+                    : `${styles.notAddedDiv}`
+                }
+                onClick={() => changeAdded(service.id)}
+              >
+                {service.name}
+              </div>
+            ))
+          : 'Carregando...'}
+      </div>
       <Btn>Atualizar</Btn>
     </form>
-    </div>
   );
 };
 
