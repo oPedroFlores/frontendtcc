@@ -151,3 +151,6 @@ transform: scale(0.85);
   height: 50px;
 }
 
+.disabledAddService{
+  background-color: red;
+}
