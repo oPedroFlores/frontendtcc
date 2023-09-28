@@ -2,5 +2,75 @@
 color: white;
   height: calc(100vh - 80px);
   background-color: var(--paleta3-cor2);
+  display: flex;
+  justify-content: center;
   width: 100%;  
+}
+
+/* Horários */
+
+.agendamentosSection form{
+  margin-top: 50px;
+  background: var(--paleta3-cor1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50%;
+  border-radius: 5px;
+}
+
+.days{
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.days div{
+  width: 120px;
+  height: 100px;
+  border-radius: 5px;
+  display: flex;
+  flex: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  width: 130px;
+  height: 130px;
+  cursor: pointer;
+  transition: .4s all ease-in-out;
+  border-radius: 5px;
+}
+
+.addedDay{
+  transform: scale(.95);
+  background-color: var(--cor-clay-5);
+  font-weight: bold;
+  font-weight: 1.125rem;
+  border: 1px solid darkgreen;
+  box-shadow: 8px 8px 10px 0 black;
+}
+
+.notAddedDay{
+  
+  border: 1px solid tomato;
+  box-shadow: 5px 5px 5px 0 black;
+  font-size: .85rem;
+  transform: scale(.8);
+  background-color: var(--paleta3-cor2);
+}
+
+.agendaTimeSet{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.agendaTimeSet input{
+  width: 100%;
 }

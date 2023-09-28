@@ -167,7 +167,6 @@ export function UPDATE_SERVICE(token, body) {
 
 // Calendar
 
-
 export function GET_CALENDAR(token) {
   return {
     url: API_URL + '/calendar',
@@ -176,6 +175,20 @@ export function GET_CALENDAR(token) {
       headers: {
         Authorization: 'Bearer ' + token,
       },
+    },
+  };
+}
+
+export function UPDATE_CALENDAR(token, body) {
+  return {
+    url: API_URL + '/calendar',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
     },
   };
 }
