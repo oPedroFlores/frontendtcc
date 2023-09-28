@@ -105,6 +105,7 @@ const Funcionarios = () => {
               selectedWorkerId={selectedWorkerId}
               workers={workers}
               getWorkers={getWorkers}
+              switchButtonFun={switchButtonFun}
             />
           </div>
         )}

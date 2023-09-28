@@ -30,8 +30,11 @@ const Servicos = () => {
 
     const response = await fetch(url, options);
     const jsonRes = await response.json();
-    setSelectedServiceId(jsonRes[0].id);
-    setServices(jsonRes);
+    if(jsonRes.length> 0){
+
+      setSelectedServiceId(jsonRes[0].id);
+      setServices(jsonRes);
+    }
   }
 
   React.useState(() => {

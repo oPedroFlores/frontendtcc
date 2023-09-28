@@ -6,7 +6,7 @@ import styles from '../CSS/Funcionarios.module.css';
 import { toast } from 'react-toastify';
 import { UPDATE_WORKER, WORKER_SERVICES } from '../../../api';
 
-const EditWorker = ({ selectedWorkerId, workers, getWorkers }) => {
+const EditWorker = ({ selectedWorkerId, workers, getWorkers, switchButtonFun }) => {
   let worker = workers.find((worker) => worker.id === selectedWorkerId) || [];
   const [services, setServices] = React.useState([]);
   const [workerServices, setWorkerServices] = React.useState([]);
@@ -64,35 +64,32 @@ const EditWorker = ({ selectedWorkerId, workers, getWorkers }) => {
       });
       const response = await fetch(url, options);
       const json = await response.json();
-      console.log(json);
+      if(response.status === 202){
+        getWorkers();
+        switchButtonFun(0);
+          toast.info(`Funcionário ${worker.name} atualizado!`, {
+            position: 'bottom-left',
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: 'dark',
+          });
+      }else{
+      toast.error(`ERRO! ${json.message}`, {
+        position: 'bottom-left',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      });
+      }
     }
-
-    // const response = await fetch(url, options);
-    // const json = await response.json();
-    // if (response.status === 200) {
-    //   getServices();
-    //   toast.info(`Funcionário ${servName.value} atualizado!`, {
-    //     position: 'bottom-left',
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: 'dark',
-    //   });
-    // } else {
-    //   toast.error(`ERRO! ${json.message}`, {
-    //     position: 'bottom-left',
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: 'dark',
-    //   });
-    // }
   }
 
   const [serviceAddedChanged, setServiceAddedChanged] = React.useState(false);

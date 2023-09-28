@@ -6,7 +6,10 @@ import { UPDATE_SERVICE } from '../../../api';
 import { toast } from 'react-toastify';
 
 const EditServ = ({ selectedServiceId, services, getServices }) => {
-  let service = services.find((service) => service.id === selectedServiceId);
+  let service = null;
+  if(services){
+    service = services.find((service) => service.id === selectedServiceId) || [];
+  }
 
   // Use o UseForm com o valor inicial
   let servName = UseForm('');
@@ -29,7 +32,7 @@ const EditServ = ({ selectedServiceId, services, getServices }) => {
       const localUserString = window.localStorage.getItem('tccuser');
       const localUser = JSON.parse(localUserString);
       const token = localUser.token;
-
+      if(!service) return;
       const { url, options } = UPDATE_SERVICE(token, {
         id: service.id,
         name: servName.value,
