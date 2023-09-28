@@ -7,10 +7,10 @@ import { toast } from 'react-toastify';
 import { UPDATE_WORKER, WORKER_SERVICES } from '../../../api';
 
 const EditWorker = ({ selectedWorkerId, workers, getWorkers, switchButtonFun }) => {
-  let worker = workers.find((worker) => worker.id === selectedWorkerId) || [];
+  let worker = null;
+  if(workers) worker = workers.find((worker) => worker.id === selectedWorkerId) || [];
   const [services, setServices] = React.useState([]);
-  const [workerServices, setWorkerServices] = React.useState([]);
-
+  const [workerServices, setWorkerServices] = React.useState();
   // Token
   const localUserString = window.localStorage.getItem('tccuser');
   const localUser = JSON.parse(localUserString);
@@ -27,7 +27,10 @@ const EditWorker = ({ selectedWorkerId, workers, getWorkers, switchButtonFun }) 
     });
     const response = await fetch(url, options);
     let jsonRes = await response.json();
-    setWorkerServices(jsonRes);
+    if(jsonRes.length > 0){
+      setWorkerServices(jsonRes);
+
+    }
   }
 
   useEffect(() => {
@@ -117,7 +120,7 @@ const EditWorker = ({ selectedWorkerId, workers, getWorkers, switchButtonFun }) 
       <Input label="Nome" type="text" name="name" {...workerName} />
       <p>Serviços</p>
       <div className={styles.workerServicesDiv}>
-        {workerServices
+        {workerServices !== undefined
           ? workerServices.map((service, index) => (
               <div
                 className={
@@ -132,6 +135,7 @@ const EditWorker = ({ selectedWorkerId, workers, getWorkers, switchButtonFun }) 
             ))
           : 'Carregando...'}
       </div>
+     
       <Btn>Atualizar</Btn>
     </form>
   );

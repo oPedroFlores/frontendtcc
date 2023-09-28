@@ -164,3 +164,18 @@ export function UPDATE_SERVICE(token, body) {
     },
   };
 }
+
+// Calendar
+
+
+export function GET_CALENDAR(token) {
+  return {
+    url: API_URL + '/calendar',
+    options: {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    },
+  };
+}

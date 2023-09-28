@@ -83,9 +83,6 @@ const Servicos = () => {
                 <option
                   key={service.id}
                   value={service.id}
-                  priceValue={service.price}
-                  nameValue={service.name}
-                  descriptionValue={service.description}
                 >
                   {service.name}
                 </option>

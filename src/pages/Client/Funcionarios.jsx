@@ -88,9 +88,6 @@ const Funcionarios = () => {
               value={selectedWorkerId}
               onChange={handleWorkerSelectChange}
             >
-              <option value="" selected="selected" disabled>
-                Selecione um trabalhador
-              </option>
               {workers.map((worker) => (
                 <option
                   key={worker.id}
@@ -102,7 +99,7 @@ const Funcionarios = () => {
               ))}
             </select>
             <EditWorker
-              selectedWorkerId={selectedWorkerId}
+              selectedWorkerId={selectedWorkerId ? selectedWorkerId : workers[0].id}
               workers={workers}
               getWorkers={getWorkers}
               switchButtonFun={switchButtonFun}
