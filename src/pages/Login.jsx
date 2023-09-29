@@ -86,12 +86,7 @@ const Login = () => {
           {login ? (
             <form onSubmit={handleSubmitLogin}>
               <div className={styles.formWrapper}>
-                <Input
-                  label="Email ou username"
-                  type="text"
-                  name="login"
-                  {...userLogin}
-                />
+                <Input label="Email" type="text" name="login" {...userLogin} />
                 <Input
                   label="Senha"
                   type="password"

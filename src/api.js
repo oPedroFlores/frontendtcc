@@ -192,3 +192,27 @@ export function UPDATE_CALENDAR(token, body) {
     },
   };
 }
+
+// Schedule
+
+export function GET_SCHEDULE_WORKERS(body) {
+  return {
+    url: API_URL + '/schedule/worker',
+    options: {
+      method: 'GET',
+
+      body: JSON.stringify(body),
+    },
+  };
+}
+
+export function GET_SCHEDULE_SERVICES(body) {
+  return {
+    url: API_URL + '/schedule/services',
+    options: {
+      method: 'GET',
+
+      body: JSON.stringify(body),
+    },
+  };
+}

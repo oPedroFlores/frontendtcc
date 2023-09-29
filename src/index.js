@@ -19,6 +19,7 @@ import Servicos from './pages/Client/Servicos';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Agendamentos from './pages/Client/Agendamentos';
+import Customer from './pages/Customer/Customer';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: '*',
         element: <Page404 />,
+      },
+      {
+        path: '/customer/:user',
+        element: <Customer />,
       },
       {
         path: '/',

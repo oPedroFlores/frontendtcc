@@ -1,0 +1,147 @@
+.customerSection{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--paleta2-cor1);
+  color: white;
+}
+
+/* StepWrapper */
+.stepWrapper{
+  width: 800px;
+  border-radius: 10px;
+  height: 700px;
+  background-color: var(--paleta2-cor2);
+}
+
+/* Login */
+
+.customerLoginWrapper h6 {
+  font-size: 3rem;
+  height: 20%;
+}
+
+.customerLoginWrapper{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.customerLoginWrapper input{
+  padding: 20px;
+  border: none;
+  border-radius: 5px;
+}
+
+.customerLoginWrapper form{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.customerLoginWrapper button{
+  width: 25%;
+}
+
+.fetchError{
+  font-size: 1.5rem !important;
+  margin-top: 50px;
+  color: tomato;
+}
+
+/* Loading */
+
+.loadingP{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(218, 223, 225, .15);
+  width: 100%;
+  height: 100vh;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 25;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.loadingP p{
+  background-color: rgba(218, 223, 225, .3);
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.loadingWrapper{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 70vh;
+  width: 750px;
+}
+
+.loadingCalendarEarsWrapper{
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.loadingCalendarEarsWrapper div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px 20px 0 0;
+  width: 15%;
+  height: 100%;
+  background-color: var(--paleta2-cor2);
+}
+
+.loadingCalendarEarsWrapper div div{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  animation: loadingCalendarDivAnimation infinite 3s ease-in-out alternate;
+}
+
+.loadingCalendar{
+  height: 90%;
+  width: 100%;
+  border-radius: 15px;
+  background-color: var(--paleta2-cor2);
+  display:flex; 
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.loadingCalendar div{
+  width: 50px;
+  height: 50px;
+  animation: loadingCalendarDivAnimation infinite 3s ease-in-out alternate;
+  border-radius: 5px;
+}
+
+@keyframes loadingCalendarDivAnimation {
+  0%{
+    background-color: gray;
+  }
+  50%{
+    background-color: lightgray;
+  }
+  100%{
+    background-color: gray;
+  }
+}
