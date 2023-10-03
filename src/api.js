@@ -197,10 +197,12 @@ export function UPDATE_CALENDAR(token, body) {
 
 export function GET_SCHEDULE_WORKERS(body) {
   return {
-    url: API_URL + '/schedule/worker',
+    url: API_URL + '/schedule/workers',
     options: {
-      method: 'GET',
-
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(body),
     },
   };
@@ -210,8 +212,37 @@ export function GET_SCHEDULE_SERVICES(body) {
   return {
     url: API_URL + '/schedule/services',
     options: {
-      method: 'GET',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}
 
+export function GET_SCHEDULE_DATES(body) {
+  return {
+    url: API_URL + '/schedule/get/schedules',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}
+
+export function SET_SCHEDULE(token, body) {
+  return {
+    url: API_URL + '/schedule/set/schedule',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
       body: JSON.stringify(body),
     },
   };

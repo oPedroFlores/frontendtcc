@@ -110,7 +110,6 @@ const Agendamentos = () => {
           day.startTime = 1;
         }
         setRender(!render);
-        console.log(schedule);
       }
     }
   }

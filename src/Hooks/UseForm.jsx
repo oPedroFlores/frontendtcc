@@ -17,8 +17,8 @@ const types = {
   },
 };
 
-const UseForm = (type, selectedServiceId) => {
-  const [value, setValue] = React.useState(selectedServiceId || '');
+const UseForm = (type, selectedValue) => {
+  const [value, setValue] = React.useState(selectedValue || '');
   const [error, setError] = React.useState(null);
 
   function validate(value) {
