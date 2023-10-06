@@ -30,8 +30,7 @@ const Servicos = () => {
 
     const response = await fetch(url, options);
     const jsonRes = await response.json();
-    if(jsonRes.length> 0){
-
+    if (jsonRes.length > 0) {
       setSelectedServiceId(jsonRes[0].id);
       setServices(jsonRes);
     }
@@ -41,6 +40,12 @@ const Servicos = () => {
     getServices();
   }, []);
 
+  const motionAnimations = {
+    initialPosition: { scale: 0 },
+    variantStart: { scale: 1 },
+    variantStart2: { x: 0, scale: 0.8 },
+  };
+
   return (
     <>
       <ClientNavBar />
@@ -49,12 +54,20 @@ const Servicos = () => {
           <motion.button
             onClick={() => switchButtonFun(0)}
             className={`${switchButton ? `${styles.disabledButton}` : ''}`}
+            variants={motionAnimations}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            initial="initialPosition"
+            animate={`${switchButton ? 'variantStart2' : 'variantStart'}`}
           >
             Listar
           </motion.button>
           <motion.button
             onClick={() => switchButtonFun(1)}
             className={`${switchButton ? '' : `${styles.disabledButton}`}`}
+            variants={motionAnimations}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            initial="initialPosition"
+            animate={`${switchButton ? 'variantStart' : 'variantStart2'}`}
           >
             Editar
           </motion.button>
@@ -80,10 +93,7 @@ const Servicos = () => {
                 Selecione um serviço
               </option>
               {services.map((service) => (
-                <option
-                  key={service.id}
-                  value={service.id}
-                >
+                <option key={service.id} value={service.id}>
                   {service.name}
                 </option>
               ))}

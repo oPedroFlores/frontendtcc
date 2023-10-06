@@ -27,11 +27,6 @@ const Customer = () => {
   const loginForm = UseForm('email');
   const passwordForm = UseForm('password');
 
-  function teste(event) {
-    event.preventDefault();
-    console.log(info);
-  }
-
   async function getServices() {
     const { url, options } = GET_SCHEDULE_SERVICES({
       username: user,
@@ -69,7 +64,6 @@ const Customer = () => {
 
   return (
     <section className={styles.customerSection}>
-      <button onClick={teste}>Click</button>
       {stepForm === 0 ? (
         <CustomerLogin
           loginForm={loginForm}
@@ -115,11 +109,21 @@ const Customer = () => {
           schedules={schedules}
           setSchedules={setSchedules}
           user={user}
+          loading={loading}
+          setLoading={setLoading}
         />
       ) : (
         ''
       )}
-      {/* {workers && services && schedules ? 'Nada' : <CustomerLoading />} */}
+      {stepForm === 4 ? (
+        <div className={styles.stepWrapper}>
+          <div className={styles.finaleReserve}>
+            <h4>Sua reserva foi feita com sucesso!</h4>
+          </div>
+        </div>
+      ) : (
+        ''
+      )}
     </section>
   );
 };
