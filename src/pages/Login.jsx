@@ -56,7 +56,19 @@ const Login = () => {
         username: usernameReg.value,
         password: passwordReg.value,
       });
-      fetch(url, options);
+      const response = await fetch(url, options);
+      const json = await response.json();
+      console.log(json);
+      if (response.status === 201) {
+        handleChange(1);
+        setFetchError(null);
+        emailReg.setValue('');
+        nameReg.setValue('');
+        usernameReg.setValue('');
+        passwordReg.setValue('');
+      } else {
+        setFetchError(json.message);
+      }
     }
   }
 
@@ -121,6 +133,9 @@ const Login = () => {
                   {...passwordReg}
                 />
                 <Btn>Enviar</Btn>
+                {fetchError && (
+                  <p className={styles.fetchError}>{fetchError}</p>
+                )}
               </div>
             </form>
           )}

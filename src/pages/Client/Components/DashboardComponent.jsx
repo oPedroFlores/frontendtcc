@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../CSS/Dashboard.module.css';
-import { GET_SCHEDULE_DATES, GET_WORKERS } from '../../../api';
+import { GET_SCHEDULE, GET_SCHEDULE_DATES, GET_WORKERS } from '../../../api';
 
 const DashboardComponent = () => {
   const [workers, setWorkers] = React.useState([]);
@@ -13,7 +13,6 @@ const DashboardComponent = () => {
   }, []);
   const handleWorkerSelectChange = (event) => {
     const selectedId = Number(event.target.value);
-    console.log(selectedId);
     setSelectedWorkerId(selectedId);
   };
 
@@ -34,7 +33,6 @@ const DashboardComponent = () => {
     // Definindo a schedule do dia
     const date = event.target.value;
     setSelectedDay(date);
-    console.log(date);
   }
 
   React.useEffect(() => {
@@ -56,6 +54,31 @@ const DashboardComponent = () => {
       setAllSchedules();
     }
   }, [selectedDay, selectedWorkerId, username, setSchedules]);
+
+  const [schedule, setSchedule] = React.useState([]);
+
+  async function showTimeInfo(hour) {
+    const date = selectedDay;
+    const partes = date.split('-');
+    const ano = partes[0];
+    const mes = partes[1];
+    const dia = partes[2];
+    const dateRequest = new Date(Date.UTC(ano, mes - 1, dia, hour)); // Crie um objeto Date com base no timestamp
+    const timeStampRequest = dateRequest.getTime();
+    const { url, options } = GET_SCHEDULE(token, {
+      worker: selectedWorkerId,
+      timestamp: timeStampRequest,
+    });
+    const response = await fetch(url, options);
+    const jsonRes = await response.json();
+    const obj = {
+      email: jsonRes.email,
+      user: jsonRes.user,
+      service: jsonRes.service,
+      hour: hour,
+    };
+    if (response.status === 200) setSchedule(obj);
+  }
 
   return (
     <div className={styles.dashboardComponent}>
@@ -122,7 +145,6 @@ const DashboardComponent = () => {
               let horasMarcadas = [];
 
               for (const time of schedules.schedules) {
-                console.log(time.workerId);
                 if (time.workerId === selectedWorkerId) {
                   const dataHora = new Date(Number(time.startTimeStamp));
                   const horas = dataHora.getHours() + 3;
@@ -139,6 +161,7 @@ const DashboardComponent = () => {
                     <div
                       key={i}
                       className={`${styles.timeCard} ${styles.notAllowedTime}`}
+                      onClick={() => showTimeInfo(i)}
                     >
                       {i} Horas
                     </div>,
@@ -158,6 +181,22 @@ const DashboardComponent = () => {
             })()
           : '...'}
       </div>
+      {schedule.user && (
+        <div className={styles.infoCard}>
+          <p className={styles.infoP}>
+            <b>Cliente:</b> {schedule.user}
+          </p>
+          <p className={styles.infoP}>
+            <b>Email:</b> {schedule.email}
+          </p>
+          <p className={styles.infoP}>
+            <b>Serviço:</b> {schedule.service}
+          </p>
+          <p className={styles.infoP}>
+            <b>Horário:</b> {schedule.hour} Horas
+          </p>
+        </div>
+      )}
     </div>
   );
 };

@@ -247,3 +247,17 @@ export function SET_SCHEDULE(token, body) {
     },
   };
 }
+
+export function GET_SCHEDULE(token, body) {
+  return {
+    url: API_URL + '/schedule/info',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}

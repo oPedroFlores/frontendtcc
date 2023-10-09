@@ -23,6 +23,10 @@ const UseForm = (type, selectedValue) => {
 
   function validate(value) {
     if (type === false) return true;
+    if (value === undefined) {
+      setError(null); // Campo vazio é considerado válido, então limpe o erro
+      return true;
+    }
     if (value.length === 0) {
       setError('Preencha um valor!');
       return false;

@@ -6,9 +6,15 @@ import styles from '../CSS/Funcionarios.module.css';
 import { toast } from 'react-toastify';
 import { UPDATE_WORKER, WORKER_SERVICES } from '../../../api';
 
-const EditWorker = ({ selectedWorkerId, workers, getWorkers, switchButtonFun }) => {
+const EditWorker = ({
+  selectedWorkerId,
+  workers,
+  getWorkers,
+  switchButtonFun,
+}) => {
   let worker = null;
-  if(workers) worker = workers.find((worker) => worker.id === selectedWorkerId) || [];
+  if (workers.length > 0)
+    worker = workers.find((worker) => worker.id === selectedWorkerId) || [];
   const [services, setServices] = React.useState([]);
   const [workerServices, setWorkerServices] = React.useState();
   // Token
@@ -27,9 +33,8 @@ const EditWorker = ({ selectedWorkerId, workers, getWorkers, switchButtonFun }) 
     });
     const response = await fetch(url, options);
     let jsonRes = await response.json();
-    if(jsonRes.length > 0){
+    if (jsonRes.length > 0) {
       setWorkerServices(jsonRes);
-
     }
   }
 
@@ -67,30 +72,30 @@ const EditWorker = ({ selectedWorkerId, workers, getWorkers, switchButtonFun }) 
       });
       const response = await fetch(url, options);
       const json = await response.json();
-      if(response.status === 202){
+      if (response.status === 202) {
         getWorkers();
         switchButtonFun(0);
-          toast.info(`Funcionário ${worker.name} atualizado!`, {
-            position: 'bottom-left',
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: 'dark',
-          });
-      }else{
-      toast.error(`ERRO! ${json.message}`, {
-        position: 'bottom-left',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'dark',
-      });
+        toast.info(`Funcionário ${worker.name} atualizado!`, {
+          position: 'bottom-left',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+        });
+      } else {
+        toast.error(`ERRO! ${json.message}`, {
+          position: 'bottom-left',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'dark',
+        });
       }
     }
   }
@@ -135,7 +140,7 @@ const EditWorker = ({ selectedWorkerId, workers, getWorkers, switchButtonFun }) 
             ))
           : 'Carregando...'}
       </div>
-     
+
       <Btn>Atualizar</Btn>
     </form>
   );

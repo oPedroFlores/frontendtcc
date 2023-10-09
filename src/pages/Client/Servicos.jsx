@@ -30,9 +30,9 @@ const Servicos = () => {
 
     const response = await fetch(url, options);
     const jsonRes = await response.json();
+    setServices(jsonRes);
     if (jsonRes.length > 0) {
       setSelectedServiceId(jsonRes[0].id);
-      setServices(jsonRes);
     }
   }
 
@@ -51,26 +51,31 @@ const Servicos = () => {
       <ClientNavBar />
       <section className={styles.servicesSection}>
         <motion.div className={styles.switchServ}>
-          <motion.button
-            onClick={() => switchButtonFun(0)}
-            className={`${switchButton ? `${styles.disabledButton}` : ''}`}
-            variants={motionAnimations}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            initial="initialPosition"
-            animate={`${switchButton ? 'variantStart2' : 'variantStart'}`}
-          >
-            Listar
-          </motion.button>
-          <motion.button
-            onClick={() => switchButtonFun(1)}
-            className={`${switchButton ? '' : `${styles.disabledButton}`}`}
-            variants={motionAnimations}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            initial="initialPosition"
-            animate={`${switchButton ? 'variantStart' : 'variantStart2'}`}
-          >
-            Editar
-          </motion.button>
+          {services.length > 0 && (
+            <motion.button
+              onClick={() => switchButtonFun(0)}
+              className={`${switchButton ? `${styles.disabledButton}` : ''}`}
+              variants={motionAnimations}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              initial="initialPosition"
+              animate={`${switchButton ? 'variantStart2' : 'variantStart'}`}
+            >
+              Listar
+            </motion.button>
+          )}
+
+          {services.length > 0 && (
+            <motion.button
+              onClick={() => switchButtonFun(1)}
+              className={`${switchButton ? '' : `${styles.disabledButton}`}`}
+              variants={motionAnimations}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              initial="initialPosition"
+              animate={`${switchButton ? 'variantStart' : 'variantStart2'}`}
+            >
+              Editar
+            </motion.button>
+          )}
         </motion.div>
         {!switchButton ? (
           <div className={styles.servList}>

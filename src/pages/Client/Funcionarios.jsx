@@ -49,26 +49,30 @@ const Funcionarios = () => {
       <ClientNavBar />
       <div className={styles.divFunc}>
         <motion.div className={styles.switchFunc}>
-          <motion.button
-            onClick={() => switchButtonFun(0)}
-            className={`${switchButton ? `${styles.disabledButton}` : ''}`}
-            variants={motionAnimations}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            initial="initialPosition"
-            animate={`${switchButton ? 'variantStart2' : 'variantStart'}`}
-          >
-            Listar
-          </motion.button>
-          <motion.button
-            onClick={() => switchButtonFun(1)}
-            className={`${switchButton ? '' : `${styles.disabledButton}`}`}
-            variants={motionAnimations}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            initial="initialPosition"
-            animate={`${switchButton ? 'variantStart' : 'variantStart2'}`}
-          >
-            Editar
-          </motion.button>
+          {workers.length > 0 && (
+            <motion.button
+              onClick={() => switchButtonFun(0)}
+              className={`${switchButton ? `${styles.disabledButton}` : ''}`}
+              variants={motionAnimations}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              initial="initialPosition"
+              animate={`${switchButton ? 'variantStart2' : 'variantStart'}`}
+            >
+              Listar
+            </motion.button>
+          )}
+          {workers.length > 0 && (
+            <motion.button
+              onClick={() => switchButtonFun(1)}
+              className={`${switchButton ? '' : `${styles.disabledButton}`}`}
+              variants={motionAnimations}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              initial="initialPosition"
+              animate={`${switchButton ? 'variantStart' : 'variantStart2'}`}
+            >
+              Editar
+            </motion.button>
+          )}
         </motion.div>
         {!switchButton ? (
           <div className={styles.funcList}>
@@ -99,7 +103,9 @@ const Funcionarios = () => {
               ))}
             </select>
             <EditWorker
-              selectedWorkerId={selectedWorkerId ? selectedWorkerId : workers[0].id}
+              selectedWorkerId={
+                selectedWorkerId ? selectedWorkerId : workers[0].id
+              }
               workers={workers}
               getWorkers={getWorkers}
               switchButtonFun={switchButtonFun}

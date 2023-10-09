@@ -7,14 +7,15 @@ import { toast } from 'react-toastify';
 
 const EditServ = ({ selectedServiceId, services, getServices }) => {
   let service = null;
-  if(services){
-    service = services.find((service) => service.id === selectedServiceId) || [];
+  if (services) {
+    service =
+      services.find((service) => service.id === selectedServiceId) || [];
   }
 
   // Use o UseForm com o valor inicial
-  let servName = UseForm('');
-  let servPrice = UseForm('');
-  let servDescription = UseForm('');
+  let servName = UseForm();
+  let servPrice = UseForm();
+  let servDescription = UseForm();
 
   useEffect(() => {
     // Atualize os valores dos campos do formulário quando selectedServiceId mudar
@@ -26,13 +27,13 @@ const EditServ = ({ selectedServiceId, services, getServices }) => {
   async function handleEditServ(event) {
     event.preventDefault();
     const confirm = window.confirm(
-      `Tem certeza que deseja excluir o serviço ${servName.value} ?`,
+      `Tem certeza que deseja EDITAR o serviço ${servName.value} ?`,
     );
     if (confirm) {
       const localUserString = window.localStorage.getItem('tccuser');
       const localUser = JSON.parse(localUserString);
       const token = localUser.token;
-      if(!service) return;
+      if (!service) return;
       const { url, options } = UPDATE_SERVICE(token, {
         id: service.id,
         name: servName.value,
@@ -44,7 +45,7 @@ const EditServ = ({ selectedServiceId, services, getServices }) => {
       const json = await response.json();
       if (response.status === 200) {
         getServices();
-        toast.info(`Funcionário ${servName.value} atualizado!`, {
+        toast.info(`Serviço ${servName.value} atualizado!`, {
           position: 'bottom-left',
           autoClose: 5000,
           hideProgressBar: false,
