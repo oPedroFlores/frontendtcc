@@ -15,7 +15,12 @@ const NavBar = () => {
 
   return (
     <nav className={stylesClientNavBar.navBar}>
-      <h2>ONTime {data ? data.username : ''} </h2>
+      <h2>ONTime</h2>
+      {data ? (
+        <p className={stylesClientNavBar.pUsername}>{data.username}</p>
+      ) : (
+        ''
+      )}
       <div ref={navRef} className={stylesClientNavBar.navDiv}>
         {data ? (
           <div className={stylesClientNavBar.links}>
