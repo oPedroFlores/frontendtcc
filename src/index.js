@@ -18,7 +18,7 @@ import Funcionarios from './pages/Client/Funcionarios';
 import Servicos from './pages/Client/Servicos';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Agendamentos from './pages/Client/Agendamentos';
+import Agendamentos from './pages/Agendamentos';
 import Customer from './pages/Customer/Customer';
 import { ClientAgenda } from './pages/Client/ClientAgenda';
 
@@ -49,10 +49,18 @@ const router = createBrowserRouter([
         element: <Planos />,
       },
       {
-        path: 'perfil/*',
+        path: 'perfil',
         element: (
           <ProtectedUserRoute>
             <Perfil />
+          </ProtectedUserRoute>
+        ),
+      },
+      {
+        path: 'agendamentos',
+        element: (
+          <ProtectedUserRoute>
+            <Agendamentos />
           </ProtectedUserRoute>
         ),
       },

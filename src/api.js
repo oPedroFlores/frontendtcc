@@ -261,3 +261,15 @@ export function GET_SCHEDULE(token, body) {
     },
   };
 }
+
+export function GET_USER_SCHEDULES(token) {
+  return {
+    url: API_URL + '/schedule/user',
+    options: {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    },
+  };
+}
