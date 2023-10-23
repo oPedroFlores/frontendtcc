@@ -15,12 +15,15 @@ const NavBar = () => {
 
   return (
     <nav className={stylesClientNavBar.navBar}>
-      <h2>ONTime</h2>
-      {data ? (
-        <p className={stylesClientNavBar.pUsername}>{data.username}</p>
-      ) : (
-        ''
-      )}
+      <div className={stylesClientNavBar.infoNamesNav}>
+        <h2>ONTime</h2>
+        {data ? (
+          <p className={stylesClientNavBar.pUsername}>{data.username}</p>
+        ) : (
+          ''
+        )}
+      </div>
+
       <div ref={navRef} className={stylesClientNavBar.navDiv}>
         {data ? (
           <div className={stylesClientNavBar.links}>

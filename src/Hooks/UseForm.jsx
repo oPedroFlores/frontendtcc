@@ -22,12 +22,20 @@ const UseForm = (type, selectedValue) => {
   const [error, setError] = React.useState(null);
 
   function validate(value) {
+    if (type === 'agenda') {
+      if (value.length === 0 || value === '' || value < 0) {
+        setValue(0);
+      }
+      if (value > 24) {
+        setValue(24);
+      }
+    }
     if (type === false) return true;
     if (value === undefined) {
       setError(null); // Campo vazio é considerado válido, então limpe o erro
       return true;
     }
-    if (value.length === 0) {
+    if (value.length === 0 && type !== 'agenda') {
       setError('Preencha um valor!');
       return false;
     } else if (types[type] && !types[type].regex.test(value)) {

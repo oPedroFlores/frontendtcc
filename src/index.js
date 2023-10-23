@@ -20,6 +20,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Agendamentos from './pages/Client/Agendamentos';
 import Customer from './pages/Customer/Customer';
+import { ClientAgenda } from './pages/Client/ClientAgenda';
 
 const router = createBrowserRouter([
   {
@@ -83,7 +84,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'agenda',
-        element: <Agendamentos />,
+        element: <ClientAgenda />,
       },
     ],
   },

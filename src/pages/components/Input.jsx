@@ -7,6 +7,8 @@ const Input = ({
   name,
   value,
   onChange,
+  max,
+  min,
   error,
   onBlur,
   validate,
@@ -23,6 +25,8 @@ const Input = ({
         type={type}
         value={value}
         onChange={onChange}
+        max={max}
+        min={min}
         onBlur={onBlur}
       />
       {error && <p className={styles.error}>{error}</p>}

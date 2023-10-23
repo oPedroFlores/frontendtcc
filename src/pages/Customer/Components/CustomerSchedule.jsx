@@ -146,6 +146,9 @@ const CustomerSchedule = ({
                     }
 
                     const elements = [];
+                    if (horarioComeco === 0) {
+                      elements.push(<p>Dia inválido!</p>);
+                    }
                     for (let i = horarioComeco; i < horarioFim; i++) {
                       if (
                         (i >= horarioBreakComeco && i < horarioBreakFim) ||
