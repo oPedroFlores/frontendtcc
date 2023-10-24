@@ -1,0 +1,17 @@
+.workersInfoSection{
+  width: 100%;
+  height: calc(100vh - 80px);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.workersInfoBar{
+  padding: 20px;
+  border-radius: 5px;
+  width: 50%;
+  background-color: var(--paleta3-cor1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

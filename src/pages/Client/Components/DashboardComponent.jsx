@@ -33,6 +33,7 @@ const DashboardComponent = () => {
     // Definindo a schedule do dia
     const date = event.target.value;
     setSelectedDay(date);
+    setSchedule([]);
   }
 
   React.useEffect(() => {
@@ -153,15 +154,22 @@ const DashboardComponent = () => {
               }
               const elements = [];
               for (let i = horarioComeco; i < horarioFim; i++) {
-                if (
-                  (i >= horarioBreakComeco && i < horarioBreakFim) ||
-                  horasMarcadas.includes(i)
-                ) {
+                if (horasMarcadas.includes(i)) {
                   elements.push(
                     <div
                       key={i}
                       className={`${styles.timeCard} ${styles.notAllowedTime}`}
                       onClick={() => showTimeInfo(i)}
+                    >
+                      {i} Horas
+                    </div>,
+                  );
+                } else if (i >= horarioBreakComeco && i < horarioBreakFim) {
+                  elements.push(
+                    <div
+                      key={i}
+                      className={`${styles.timeCard} ${styles.lunchTime}`}
+                      onClick={() => showTimeInfo('lunch')}
                     >
                       {i} Horas
                     </div>,

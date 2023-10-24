@@ -185,6 +185,11 @@
   transform: scale(1.1);
 }
 
+.lunchTime{
+  background-color: yellow;
+  color: black;
+}
+
 /* Info */
 
 .infoCard{

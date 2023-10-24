@@ -150,14 +150,23 @@ const CustomerSchedule = ({
                       elements.push(<p>Dia inválido!</p>);
                     }
                     for (let i = horarioComeco; i < horarioFim; i++) {
-                      if (
-                        (i >= horarioBreakComeco && i < horarioBreakFim) ||
-                        horasMarcadas.includes(i)
-                      ) {
+                      if (horasMarcadas.includes(i)) {
                         elements.push(
                           <div
                             key={i}
                             className={`${styles.timeCard} ${styles.notAllowedTime}`}
+                          >
+                            {i} Horas
+                          </div>,
+                        );
+                      } else if (
+                        i >= horarioBreakComeco &&
+                        i < horarioBreakFim
+                      ) {
+                        elements.push(
+                          <div
+                            key={i}
+                            className={`${styles.timeCard} ${styles.lunchTime}`}
                           >
                             {i} Horas
                           </div>,

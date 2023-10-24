@@ -259,6 +259,13 @@
   cursor: not-allowed;
 }
 
+.lunchTime{
+  background-color: yellow;
+  transform: scale(.95);
+  color: black;
+  cursor: not-allowed;
+}
+
 /* Loading */
 
 .loadingP{

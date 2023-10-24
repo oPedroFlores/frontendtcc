@@ -109,7 +109,32 @@ export function UPDATE_WORKER(token, body) {
   };
 }
 
+export function WORKERS_INFO(token) {
+  return {
+    url: API_URL + '/workers/info',
+    options: {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    },
+  };
+}
+
 // Services
+
+export function SERVICES_INFO(token) {
+  return {
+    url: API_URL + '/services/info',
+    options: {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    },
+  };
+}
 
 export function GET_SERVICES(token) {
   return {
