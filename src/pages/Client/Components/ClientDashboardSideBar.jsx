@@ -61,7 +61,6 @@ const ClientDashboardSideBar = ({ section, setSection }) => {
           <FaClipboardList />
           <p>Serviços</p>
         </div>
-        <p>Test</p>
       </div>
     </div>
   );

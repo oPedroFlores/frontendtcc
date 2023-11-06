@@ -81,6 +81,10 @@ const DashboardComponent = () => {
     if (response.status === 200) setSchedule(obj);
   }
 
+  function disableInfo() {
+    setSchedule([]);
+  }
+
   return (
     <div className={styles.dashboardComponent}>
       <div className={styles.dashboardSelectOptions}>
@@ -169,7 +173,7 @@ const DashboardComponent = () => {
                     <div
                       key={i}
                       className={`${styles.timeCard} ${styles.lunchTime}`}
-                      onClick={() => showTimeInfo('lunch')}
+                      onClick={() => disableInfo()}
                     >
                       {i} Horas
                     </div>,
@@ -179,6 +183,7 @@ const DashboardComponent = () => {
                     <div
                       key={i}
                       className={`${styles.timeCard} ${styles.allowedTime} `}
+                      onClick={() => disableInfo()}
                     >
                       {i} Horas
                     </div>,

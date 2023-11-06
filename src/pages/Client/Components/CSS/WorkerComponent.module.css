@@ -6,12 +6,59 @@
   display: flex;
 }
 
-.workersInfoBar{
+.workersInfoBar, .workersInfoBar canvas{
   padding: 20px;
   border-radius: 5px;
-  width: 50%;
+  width: 1000px;
+  height: 510px;
   background-color: var(--paleta3-cor1);
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.workersInfoBar canvas{
+  display: none;
+}
+
+.pieChartDiv{
+  display: none;
+}
+
+.workersInfoBar canvas{
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (max-width:1200px){
+  .workersInfoBar{
+    width: 800px;
+    height: 400px;
+  }
+}
+
+@media (max-width:1000px){
+  .workersInfoBar{
+    width: 600px;
+    height: 300px;
+  }
+}
+
+@media (max-width:800px){
+  .workersInfoBar{
+    width: 400px;
+    height: 250px;
+  }
+}
+
+@media (max-width:550px){
+  .workersInfoBar{
+    background-color: transparent;
+  }
+  .barChartDiv{
+    display: none;
+  }
+  .pieChartDiv{
+    display: block;
+  }
 }

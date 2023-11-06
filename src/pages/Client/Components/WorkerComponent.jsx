@@ -37,7 +37,16 @@ const WorkerComponent = () => {
     <section className={styles.workersInfoSection}>
       {workersInfo.length > 0 ? (
         <div className={styles.workersInfoBar}>
-          <BarChart data={workersData} />
+          <div className={styles.barChartDiv}>
+            <BarChart data={workersData} pie={false} />
+          </div>
+          <div className={styles.pieChartDiv}>
+            <BarChart
+              data={workersData}
+              pie={true}
+              className={styles.pieChart}
+            />
+          </div>
         </div>
       ) : (
         ''
