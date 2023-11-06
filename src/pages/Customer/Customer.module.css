@@ -101,11 +101,13 @@
 }
 
 .servicesWrapper h3{
+  text-align: center;
   height: 15%;
   font-size: 2rem;
-  margin-top: 25px;
+  margin-top: 45px;
 }
 .servicesDivs{
+  margin-top: 50px;
   height: 85%;
   width: 100%;
   display: flex;
@@ -113,6 +115,7 @@
   gap: 2rem;
   justify-content: center;
   flex-wrap:wrap;
+  overflow-y: auto;
 }
 
 .serviceCard{
@@ -171,7 +174,8 @@
 .customerWorkersWrapper h3{
   height: 15%;
   font-size: 2rem;
-  margin-top: 25px;
+  margin-top: 55px;
+  text-align: center;
 }
 
 .workerCard{
@@ -213,6 +217,30 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
+}
+
+.scheduleWrapper button{
+  left: 0;
+  margin: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .4s all ease-in-out;
+  outline: none;
+  background-color: var(--paleta3-cor2);
+  color: white;
+}
+
+.scheduleWrapper h3{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.scheduleWrapper input{
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
 }
 
 .scheduleDates{
@@ -355,5 +383,17 @@
   }
   100%{
     background-color: gray;
+  }
+}
+
+@media (max-width: 850px) {
+  .stepWrapper{
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 550px) {
+  .stepWrapper{
+    max-width: 300px;
   }
 }

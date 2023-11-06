@@ -1,7 +1,6 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import styles from './Customer.module.css';
-import CustomerLoading from './CustomerLoading';
 import UseForm from '../../Hooks/UseForm';
 import CustomerLogin from './Components/CustomerLogin';
 import CustomerService from './Components/CustomerService';
@@ -36,7 +35,8 @@ const Customer = () => {
     if (response.status === 200) {
       setServices(jsonRes);
     } else {
-      alert('ERRO!');
+      alert('Erro! usuário não encontrado!');
+      return <Navigate to="/login" />;
     }
   }
 
@@ -49,7 +49,8 @@ const Customer = () => {
     if (response.status === 200) {
       setWorkers(jsonRes);
     } else {
-      alert('ERRO!');
+      alert('Erro! usuário não encontrado!');
+      return <Navigate to="/login" />;
     }
   }
 
@@ -58,7 +59,7 @@ const Customer = () => {
       getServices();
       getWorkers();
     } catch (error) {
-      alert(error);
+      alert('Erro! usuário não encontrado!');
     }
   }, []);
 

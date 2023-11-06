@@ -1,9 +1,10 @@
 import React from 'react';
 import { AUTO_LOGIN, LOGIN_AUTHENTICATE } from './api';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 export const UserContext = React.createContext();
 
 export const UserStorage = ({ children }) => {
+  const location = useLocation();
   const [data, setData] = React.useState(null);
   const [logged, setLogged] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
@@ -31,7 +32,7 @@ export const UserStorage = ({ children }) => {
       localStorage.setItem('tccuser', JSON.stringify(userStorage));
       switch (Number(userStorage.role)) {
         case 0:
-          navigate('/perfil');
+          navigate('/agendamentos');
           break;
         case 1:
           navigate('/client/dashboard');
@@ -42,7 +43,7 @@ export const UserStorage = ({ children }) => {
 
         default:
           console.log(userStorage.role);
-          navigate('/perfil');
+          navigate('/agendamentos');
           break;
       }
       setData(userStorage);
@@ -88,7 +89,10 @@ export const UserStorage = ({ children }) => {
             console.log(json.role);
             switch (Number(userStorage.role)) {
               case 0:
-                navigate('/perfil');
+                if (location.pathname.startsWith('/customer')) {
+                } else {
+                  navigate('/agendamentos');
+                }
                 break;
               case 1:
                 navigate('/client/dashboard');
@@ -99,7 +103,7 @@ export const UserStorage = ({ children }) => {
 
               default:
                 console.log(userStorage.role);
-                navigate('/perfil');
+                navigate('/agendamentos');
                 break;
             }
           } else {

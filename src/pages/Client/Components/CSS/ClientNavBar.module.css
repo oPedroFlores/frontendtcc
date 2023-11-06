@@ -6,6 +6,7 @@
     padding: 0 2rem;
     background-color: var(--paleta3-cor1);
     color: var(--cor-branca);
+    z-index: 999;
   }
   
   h2{

@@ -19,7 +19,7 @@ const Login = () => {
   const [login, setLogin] = useState(true);
 
   const { userLoginFunc, loading, logged } = React.useContext(UserContext);
-  if (logged) return <Navigate to="/perfil" />;
+  if (logged) return <Navigate to="/agendamentos" />;
   const handleChange = (param) => {
     setLogin(param);
   };

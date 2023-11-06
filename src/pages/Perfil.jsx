@@ -1,12 +1,7 @@
 import React from 'react';
-import NavBar from './components/NavBar';
+import { Navigate } from 'react-router-dom';
 const Perfil = () => {
-  return (
-    <div>
-      <NavBar />
-      Perfil
-    </div>
-  );
+  return <Navigate to="/agendamentos" />;
 };
 
 export default Perfil;

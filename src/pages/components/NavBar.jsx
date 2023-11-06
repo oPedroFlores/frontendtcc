@@ -27,14 +27,6 @@ const NavBar = () => {
             >
               Agendamentos
             </Link>
-            <Link
-              to="/perfil"
-              className={
-                location.pathname === '/perfil' ? styles.activedLink : ''
-              }
-            >
-              {data.username}
-            </Link>
             <button onClick={userLogout}>Logout</button>
           </div>
         ) : (

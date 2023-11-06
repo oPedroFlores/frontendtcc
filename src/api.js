@@ -298,3 +298,17 @@ export function GET_USER_SCHEDULES(token) {
     },
   };
 }
+
+export function DELETE_SCHEDULE(token, body) {
+  return {
+    url: API_URL + '/schedule/delete',
+    options: {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}

@@ -74,6 +74,7 @@
   display: flex;
   justify-content: center;
   gap: 3rem;
+  flex-wrap: wrap;
 }
 
 .userScheduleCard{
@@ -100,5 +101,12 @@
 .clientLink{
   color: white;
   text-decoration: underline;
+  font-weight: bold;
+}
+
+.desmarcarButton{
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
   font-weight: bold;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import NavBar from './components/NavBar';
-import { GET_USER_SCHEDULES } from '../api';
+import { DELETE_SCHEDULE, GET_USER_SCHEDULES } from '../api';
 import styles from './CSS/Agendamentos.module.css';
 import { Link } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ const Agendamentos = () => {
         throw new Error(jsonRes);
       }
     } catch (error) {
-      alert(error);
+      console.log(error);
     }
   }
 
@@ -56,11 +56,32 @@ const Agendamentos = () => {
     setOption(params);
   }
 
+  async function desmarcarSchedule(sch) {
+    const confirm = window.confirm('Deseja desmarcar este horário?');
+    if (confirm) {
+      const localUserString = window.localStorage.getItem('tccuser');
+      const localUser = JSON.parse(localUserString);
+      const token = localUser.token;
+      const { url, options } = DELETE_SCHEDULE(token, sch);
+      try {
+        const response = await fetch(url, options);
+        const jsonRes = await response.json();
+        if (response.status === 200) {
+          getSchedules();
+        } else {
+          throw new Error({ jsonRes });
+        }
+      } catch (error) {
+        alert(error);
+      }
+    }
+  }
+
   return (
     <section>
       <NavBar />
       <div className={styles.userSchedulesSection}>
-        {schedules.length > 0 && (
+        {schedules.length > 0 ? (
           <div className={styles.loadedUserSchedules}>
             <div className={styles.userSchedulesOptionsDiv}>
               <button
@@ -109,11 +130,19 @@ const Agendamentos = () => {
                         {schedule.clientUsername}
                       </Link>
                     </p>
+                    <button
+                      className={styles.desmarcarButton}
+                      onClick={() => desmarcarSchedule(schedule)}
+                    >
+                      Desmarcar
+                    </button>
                   </div>
                 );
               })}
             </div>
           </div>
+        ) : (
+          <div className={styles.userSchedulesCardDiv}></div>
         )}
       </div>
     </section>
