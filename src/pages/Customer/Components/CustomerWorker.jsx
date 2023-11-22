@@ -23,7 +23,7 @@ const CustomerWorker = ({ workers, stepForm, setStepForm, info, setInfo }) => {
     <div className={styles.stepWrapper}>
       <div className={styles.customerWorkersWrapper}>
         <button onClick={backStep}>Voltar</button>
-        <h3>Selecione o serviço desejado</h3>
+        <h3>Selecione o funcionário desejado</h3>
         <div className={styles.servicesDivs}>
           {workers
             ? workers.map((worker, index) => {
